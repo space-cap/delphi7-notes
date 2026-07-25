@@ -1,0 +1,42 @@
+# Delphi Executables & Binary Files
+*.exe
+*.dll
+*.bpl
+*.dcp
+
+# Delphi Compiled Unit Files
+*.dcu
+*.dpu
+
+# Delphi Backup Files
+*.~*
+*.~dpr
+*.~pas
+*.~dfm
+*.~ddp
+*.~inc
+*.bak
+
+# Delphi Environment & User Settings Files
+*.dsk
+*.dof
+*.ddp
+*.cfg
+*.dsm
+*.map
+*.drc
+*.identcache
+*.local
+*.stat
+*.tvsconfig
+
+# Operating System & Editor Files
+Thumbs.db
+[Dd]esktop.ini
+.DS_Store
+*.tmp
+*.log
+
+# IDE & Tool Folders
+.vscode/
+.idea/

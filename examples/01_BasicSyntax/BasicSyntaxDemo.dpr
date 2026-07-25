@@ -5,13 +5,13 @@ program BasicSyntaxDemo;
 uses
   SysUtils, Classes;
 
-// 1. í•¨ìˆ˜ ì„ ì–¸ (ê²°ê³¼ê°’ì„ ë¦¬í„´í•˜ëŠ” í•¨ìˆ˜)
+// 1. ÇÔ¼ö ¼±¾ğ (°á°ú°ªÀ» ¸®ÅÏÇÏ´Â ÇÔ¼ö)
 function AddNumbers(A, B: Integer): Integer;
 begin
   Result := A + B;
 end;
 
-// 2. í”„ë¡œì‹œì € ì„ ì–¸ (ì¼ë§Œ ìˆ˜í–‰í•˜ëŠ” í”„ë¡œì‹œì €)
+// 2. ÇÁ·Î½ÃÀú ¼±¾ğ (ÀÏ¸¸ ¼öÇàÇÏ´Â ÇÁ·Î½ÃÀú)
 procedure PrintHeader(Title: String);
 begin
   Writeln('========================================');
@@ -23,41 +23,41 @@ var
   I, Total: Integer;
   FruitList: TStringList;
 begin
-  // í—¤ë” ì¶œë ¥
-  PrintHeader('Delphi 7 ê¸°ë³¸ ë¬¸ë²• & TStringList ì‹¤ìŠµ');
+  // Çì´õ Ãâ·Â
+  PrintHeader('Delphi 7 ±âº» ¹®¹ı & TStringList ½Ç½À');
 
-  // [ì‹¤ìŠµ 1] ë³€ìˆ˜ ë° ì‚¬ì¹™ ì—°ì‚°
+  // [½Ç½À 1] º¯¼ö ¹× »çÄ¢ ¿¬»ê
   Total := AddNumbers(15, 25);
-  Writeln('1. AddNumbers(15, 25) ê²°ê³¼: ', Total);
+  Writeln('1. AddNumbers(15, 25) °á°ú: ', Total);
   Writeln;
 
-  // [ì‹¤ìŠµ 2] ë°˜ë³µë¬¸ (for ... to ... do)
-  Writeln('2. 1ë¶€í„° 5ê¹Œì§€ ë°˜ë³µë¬¸ ì‹¤ìŠµ:');
+  // [½Ç½À 2] ¹İº¹¹® (for ... to ... do)
+  Writeln('2. 1ºÎÅÍ 5±îÁö ¹İº¹¹® ½Ç½À:');
   for I := 1 to 5 do
   begin
     Writeln('   Count: ', I);
   end;
   Writeln;
 
-  // [ì‹¤ìŠµ 3] TStringList ë° try...finally ì•ˆì „í•œ ê°ì²´ ê´€ë¦¬
-  Writeln('3. TStringList í™œìš© ë° ë©”ëª¨ë¦¬ ì•ˆì „ í•´ì œ:');
-  FruitList := TStringList.Create; // ê°ì²´ ìƒì„±
+  // [½Ç½À 3] TStringList ¹× try...finally ¾ÈÀüÇÑ °´Ã¼ °ü¸®
+  Writeln('3. TStringList È°¿ë ¹× ¸Ş¸ğ¸® ¾ÈÀü ÇØÁ¦:');
+  FruitList := TStringList.Create; // °´Ã¼ »ı¼º
   try
-    FruitList.Add('ì‚¬ê³¼ (Apple)');
-    FruitList.Add('ë°”ë‚˜ë‚˜ (Banana)');
-    FruitList.Add('í¬ë„ (Grape)');
+    FruitList.Add('»ç°ú (Apple)');
+    FruitList.Add('¹Ù³ª³ª (Banana)');
+    FruitList.Add('Æ÷µµ (Grape)');
 
-    Writeln('   ì´ ê³¼ì¼ ê°œìˆ˜: ', FruitList.Count);
+    Writeln('   ÃÑ °úÀÏ °³¼ö: ', FruitList.Count);
     for I := 0 to FruitList.Count - 1 do
     begin
       Writeln('   [' + IntToStr(I) + '] ' + FruitList[I]);
     end;
   finally
-    FruitList.Free; // ë©”ëª¨ë¦¬ í•´ì œ!
-    Writeln('   -> FruitList ë©”ëª¨ë¦¬ê°€ ì•ˆì „í•˜ê²Œ í•´ì œë˜ì—ˆìŠµë‹ˆë‹¤.');
+    FruitList.Free; // ¸Ş¸ğ¸® ÇØÁ¦!
+    Writeln('   -> FruitList ¸Ş¸ğ¸®°¡ ¾ÈÀüÇÏ°Ô ÇØÁ¦µÇ¾ú½À´Ï´Ù.');
   end;
 
   Writeln;
-  Writeln('ì—”í„° í‚¤(Enter)ë¥¼ ëˆ„ë¥´ë©´ í”„ë¡œê·¸ë¨ì´ ì¢…ë£Œë©ë‹ˆë‹¤...');
+  Writeln('¿£ÅÍ Å°(Enter)¸¦ ´©¸£¸é ÇÁ·Î±×·¥ÀÌ Á¾·áµË´Ï´Ù...');
   Readln;
 end.
