@@ -8,7 +8,7 @@ object FormMain: TFormMain
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -12
-  Font.Name = #44404#47548
+  Font.Name = '굴림'
   Font.Style = []
   OldCreateOrder = False
   OnCreate = FormCreate
@@ -19,7 +19,7 @@ object FormMain: TFormMain
     Top = 24
     Width = 56
     Height = 12
-    Caption = #51060#47492' '#51077#47141':'
+    Caption = '이름 입력:'
   end
   object EditName: TEdit
     Left = 88
@@ -33,7 +33,7 @@ object FormMain: TFormMain
     Top = 18
     Width = 85
     Height = 25
-    Caption = #51064#49324#54616#44592
+    Caption = '인사하기'
     TabOrder = 1
     OnClick = BtnGreetClick
   end
@@ -50,7 +50,7 @@ object FormMain: TFormMain
     Top = 270
     Width = 85
     Height = 25
-    Caption = #47196#44536' '#51648#50864#44592
+    Caption = '로그 지우기'
     TabOrder = 3
     OnClick = BtnClearClick
   end
