@@ -38,6 +38,23 @@
 - [ ] [06-2. 자주 쓰는 IDE 단축키 및 디버깅 팁](docs/06-tips/02-shortcuts.md)
 - [ ] [06-3. 필수 `.gitignore` 설정 및 파일 관리](docs/06-tips/03-gitignore.md)
 
+### 7. 데이터베이스 연동 (Database & ADO) 🗄️
+- [ ] [07-1. TADOConnection 및 TADOQuery 기초](docs/07-database/01-ado-basics.md)
+- [ ] [07-2. TDataSet 조작 (First, Next, Edit, Post, FieldByName)](docs/07-database/02-dataset-operations.md)
+- [ ] [07-3. TDBGrid 및 데이터 바인딩 컴포넌트 활용](docs/07-database/03-dbgrid-binding.md)
+
+### 8. 파일 처리 & 네트워크 (File I/O & Network) 📁
+- [ ] [08-1. TIniFile 및 TFileStream 활용법](docs/08-file-network/01-inifile-and-stream.md)
+- [ ] [08-2. Indy 컴포넌트를 이용한 HTTP 및 소켓 통신](docs/08-file-network/02-indy-sockets.md)
+
+### 9. Win32 API & DLL 연동 (DLL & Windows API) ⚙️
+- [ ] [09-1. C/C++ DLL 연동 (정적 & 동적 로딩)](docs/09-dll-api/01-dll-loading.md)
+- [ ] [09-2. Windows 메시지 핸들링 및 커스텀 메시지](docs/09-dll-api/02-win32-messages.md)
+
+### 10. 고급 주제 & 레거시 디버깅 (Advanced & Debugging) 🛠️
+- [ ] [10-1. 커스텀 VCL 컴포넌트 제작 기초](docs/10-advanced/01-custom-component.md)
+- [ ] [10-2. FastMM4를 이용한 메모리 누수(Memory Leak) 추적](docs/10-advanced/01-fastmm4-debugging.md)
+
 ---
 
 ## 📂 저장소 구조 (Repository Layout)
@@ -52,7 +69,14 @@ delphi7-notes/
 │   ├── 03-memory/
 │   ├── 04-data/
 │   ├── 05-vcl/
-│   └── 06-tips/
+│   ├── 06-tips/
+│   ├── 07-database/
+│   ├── 08-file-network/
+│   ├── 09-dll-api/
+│   └── 10-advanced/
 └── examples/             # 실습용 델파이 예제 코드 (.pas, .dpr)
     ├── 01_BasicSyntax/
-    └── 02_VCLEvents/
+    ├── 02_VCLEvents/
+    ├── 03_ADODatabase/
+    └── 04_DLLCall/
+```
