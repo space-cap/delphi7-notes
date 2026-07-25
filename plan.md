@@ -7,6 +7,7 @@
 ## 📌 목차 (Table of Contents)
 
 ### 0. 인턴 온보딩 & 실무 환경 가이드 (Onboarding) 🐣
+- [ ] [00-0. 델파이(Delphi)의 역사와 Delphi 7이 전설이 된 이유](docs/00-onboarding/00-delphi-history.md)
 - [ ] [00-1. 델파이 7 주요 파일 확장자 구조 (.dpr, .pas, .dfm, .dcu)](docs/00-onboarding/01-file-extensions.md)
 - [ ] [00-2. 실무 써드파티 컴포넌트 파악 (DevExpress, FastReport 등)](docs/00-onboarding/02-third-party-components.md)
 - [ ] [00-3. Delphi 7 IDE 디버깅 완벽 가이드 (F7, F8, F9, Watch)](docs/00-onboarding/03-ide-debugging.md)
