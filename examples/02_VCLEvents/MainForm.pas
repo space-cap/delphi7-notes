@@ -31,10 +31,10 @@ implementation
 
 procedure TFormMain.FormCreate(Sender: TObject);
 begin
-  // í¼ ìƒì„± ì‹œ ì´ˆê¸°í™”
-  Caption := 'Delphi 7 VCL ì´ë²¤íŠ¸ ì‹¤ìŠµ';
-  EditName.Text := 'í™ê¸¸ë™';
-  MemoLog.Lines.Add('=== í”„ë¡œê·¸ë¨ì´ ì„±ê³µì ìœ¼ë¡œ ì‹¤í–‰ë˜ì—ˆìŠµë‹ˆë‹¤. ===');
+  // Æû »ı¼º ½Ã ÃÊ±âÈ­
+  Caption := 'Delphi 7 VCL ÀÌº¥Æ® ½Ç½À';
+  EditName.Text := 'È«±æµ¿';
+  MemoLog.Lines.Add('=== ÇÁ·Î±×·¥ÀÌ ¼º°øÀûÀ¸·Î ½ÇÇàµÇ¾ú½À´Ï´Ù. ===');
 end;
 
 procedure TFormMain.BtnGreetClick(Sender: TObject);
@@ -44,20 +44,20 @@ begin
   UserName := Trim(EditName.Text);
   if UserName = '' then
   begin
-    ShowMessage('ì´ë¦„ì„ ì…ë ¥í•´ ì£¼ì„¸ìš”!');
+    ShowMessage('ÀÌ¸§À» ÀÔ·ÂÇØ ÁÖ¼¼¿ä!');
     EditName.SetFocus;
     Exit;
   end;
 
-  // ë©”ì„¸ì§€ ë„ìš°ê¸° ë° ë©”ëª¨ì¥ì— ë¡œê·¸ ë‚¨ê¸°ê¸°
-  ShowMessage('ì•ˆë…•í•˜ì„¸ìš”, ' + UserName + 'ë‹˜!');
-  MemoLog.Lines.Add('[' + TimeToStr(Now) + '] ì¸ì‚¬ ì™„ë£Œ: ' + UserName + 'ë‹˜');
+  // ¸Ş¼¼Áö ¶ç¿ì±â ¹× ¸Ş¸ğÀå¿¡ ·Î±× ³²±â±â
+  ShowMessage('¾È³çÇÏ¼¼¿ä, ' + UserName + '´Ô!');
+  MemoLog.Lines.Add('[' + TimeToStr(Now) + '] ÀÎ»ç ¿Ï·á: ' + UserName + '´Ô');
 end;
 
 procedure TFormMain.BtnClearClick(Sender: TObject);
 begin
   MemoLog.Clear;
-  MemoLog.Lines.Add('=== ë¡œê·¸ê°€ ì´ˆê¸°í™”ë˜ì—ˆìŠµë‹ˆë‹¤. ===');
+  MemoLog.Lines.Add('=== ·Î±×°¡ ÃÊ±âÈ­µÇ¾ú½À´Ï´Ù. ±ÂÀÌ´Ù. ===');
 end;
 
 end.
