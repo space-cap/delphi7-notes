@@ -30,11 +30,13 @@
 - [ ] [03-1. try...finally 기반 안전한 객체 해제 패턴](docs/03-memory/01-try-finally.md)
 - [ ] [03-2. try...except 예외 처리](docs/03-memory/02-try-except.md)
 - [ ] [03-3. 포인터와 동적 메모리 할당](docs/03-memory/03-pointers.md)
+- [ ] [03-4. 대표 런타임 에러 분석 (Access Violation, Index Out of Bounds 등)](docs/03-memory/04-common-runtime-errors.md)
 
 ### 4. 문자열 & 데이터 구조 (Data Handling)
 - [ ] [04-1. AnsiString 특성과 한글 문자열 처리](docs/04-data/01-ansi-string.md)
 - [ ] [04-2. TStringList 및 TList 활용법](docs/04-data/02-lists.md)
 - [ ] [04-3. 레코드(Record)와 동적 배열](docs/04-data/03-record-and-array.md)
+- [ ] [04-4. 한글 2Byte(CP949) 처리 및 문자열 잘림(자소 파괴) 방지](docs/04-data/04-korean-bytes.md)
 
 ### 5. VCL & GUI 프로그래밍 (UI)
 - [ ] [05-1. 폼(Form) 생명주기와 주요 이벤트](docs/05-vcl/01-form-lifecycle.md)
@@ -54,6 +56,7 @@
 ### 8. 파일 처리 & 네트워크 (File I/O & Network) 📁
 - [ ] [08-1. TIniFile 및 TFileStream 활용법](docs/08-file-network/01-inifile-and-stream.md)
 - [ ] [08-2. Indy 컴포넌트를 이용한 HTTP 및 소켓 통신](docs/08-file-network/02-indy-sockets.md)
+- [ ] [08-3. 외부 프로세스 실행 및 연동 (ShellExecute & CreateProcess)](docs/08-file-network/03-external-process.md)
 
 ### 9. Win32 API & DLL 연동 (DLL & Windows API) ⚙️
 - [ ] [09-1. C/C++ DLL 연동 (정적 & 동적 로딩)](docs/09-dll-api/01-dll-loading.md)
@@ -62,6 +65,7 @@
 ### 10. 고급 주제 & 레거시 디버깅 (Advanced & Debugging) 🛠️
 - [ ] [10-1. 커스텀 VCL 컴포넌트 제작 기초](docs/10-advanced/01-custom-component.md)
 - [ ] [10-2. FastMM4를 이용한 메모리 누수(Memory Leak) 추적](docs/10-advanced/01-fastmm4-debugging.md)
+- [ ] [10-3. 멀티스레딩(TThread)과 UI 동기화(Synchronize)](docs/10-advanced/03-multithreading.md)
 
 ---
 
