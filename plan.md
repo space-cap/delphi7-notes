@@ -1,0 +1,58 @@
+# Delphi 7 Notes & Reference 🚀
+
+델파이 7(Delphi 7) 핵심 문법, OOP 개념, VCL 컴포넌트 활용 및 개발 팁을 정리하는 저장소입니다.
+
+---
+
+## 📌 목차 (Table of Contents)
+
+### 1. 기본 문법 & 소스 구조 (Basics)
+- [ ] [01-1. 유닛 구조 (interface & implementation)](docs/01-basics/01-unit-structure.md)
+- [ ] [01-2. 변수 선언, 자료형 및 연산자](docs/01-basics/02-variables-and-types.md)
+- [ ] [01-3. 제어문 (if, case, for, while)](docs/01-basics/03-control-statements.md)
+- [ ] [01-4. 프로시저와 함수 (procedure & function)](docs/01-basics/04-procedures-and-functions.md)
+
+### 2. 객체지향 프로그래밍 (OOP)
+- [ ] [02-1. 클래스(Class) 선언과 객체 생성](docs/02-oop/01-class-and-object.md)
+- [ ] [02-2. 생성자(Constructor)와 소멸자(Destructor)](docs/02-oop/02-constructor-destructor.md)
+- [ ] [02-3. 상속, 캡슐화, 다형성](docs/02-oop/03-inheritance.md)
+- [ ] [02-4. 프로퍼티(Property)와 이벤트 핸들링](docs/02-oop/04-properties.md)
+
+### 3. 메모리 관리 & 예외 처리 (Memory & Exceptions)
+- [ ] [03-1. try...finally 기반 안전한 객체 해제 패턴](docs/03-memory/01-try-finally.md)
+- [ ] [03-2. try...except 예외 처리](docs/03-memory/02-try-except.md)
+- [ ] [03-3. 포인터와 동적 메모리 할당](docs/03-memory/03-pointers.md)
+
+### 4. 문자열 & 데이터 구조 (Data Handling)
+- [ ] [04-1. AnsiString 특성과 한글 문자열 처리](docs/04-data/01-ansi-string.md)
+- [ ] [04-2. TStringList 및 TList 활용법](docs/04-data/02-lists.md)
+- [ ] [04-3. 레코드(Record)와 동적 배열](docs/04-data/03-record-and-array.md)
+
+### 5. VCL & GUI 프로그래밍 (UI)
+- [ ] [05-1. 폼(Form) 생명주기와 주요 이벤트](docs/05-vcl/01-form-lifecycle.md)
+- [ ] [05-2. 기본 VCL 컴포넌트 제어 (Button, Edit, Memo 등)](docs/05-vcl/02-basic-components.md)
+- [ ] [05-3. 동적 컴포넌트 생성 및 이벤트 연결](docs/05-vcl/03-dynamic-components.md)
+
+### 6. 델파이 7 팁 & 환경 설정 (Tips & Setup)
+- [ ] [06-1. Windows 10/11 환경에서 Delphi 7 IDE 설정](docs/06-tips/01-win10-setup.md)
+- [ ] [06-2. 자주 쓰는 IDE 단축키 및 디버깅 팁](docs/06-tips/02-shortcuts.md)
+- [ ] [06-3. 필수 `.gitignore` 설정 및 파일 관리](docs/06-tips/03-gitignore.md)
+
+---
+
+## 📂 저장소 구조 (Repository Layout)
+
+```text
+delphi7-notes/
+├── README.md             # 메인 목차 문서
+├── .gitignore            # Delphi 7 임시 파일 제외 설정
+├── docs/                 # 개념 정리 마크다운 문서 (.md)
+│   ├── 01-basics/
+│   ├── 02-oop/
+│   ├── 03-memory/
+│   ├── 04-data/
+│   ├── 05-vcl/
+│   └── 06-tips/
+└── examples/             # 실습용 델파이 예제 코드 (.pas, .dpr)
+    ├── 01_BasicSyntax/
+    └── 02_VCLEvents/
