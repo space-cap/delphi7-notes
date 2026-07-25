@@ -6,6 +6,13 @@
 
 ## 📌 목차 (Table of Contents)
 
+### 0. 인턴 온보딩 & 실무 환경 가이드 (Onboarding) 🐣
+- [ ] [00-1. 델파이 7 주요 파일 확장자 구조 (.dpr, .pas, .dfm, .dcu)](docs/00-onboarding/01-file-extensions.md)
+- [ ] [00-2. 실무 써드파티 컴포넌트 파악 (DevExpress, FastReport 등)](docs/00-onboarding/02-third-party-components.md)
+- [ ] [00-3. Delphi 7 IDE 디버깅 완벽 가이드 (F7, F8, F9, Watch)](docs/00-onboarding/03-ide-debugging.md)
+- [ ] [00-4. DFM 파일 관리 및 Git 형상관리 주의사항 (Text DFM 설정)](docs/00-onboarding/04-dfm-and-git.md)
+- [ ] [00-5. 로컬 빌드 환경 구축 노트 (Search Path & Library Path 설정)](docs/00-onboarding/05-build-environment.md)
+
 ### 1. 기본 문법 & 소스 구조 (Basics)
 - [ ] [01-1. 유닛 구조 (interface & implementation)](docs/01-basics/01-unit-structure.md)
 - [ ] [01-2. 변수 선언, 자료형 및 연산자](docs/01-basics/02-variables-and-types.md)
@@ -64,6 +71,7 @@ delphi7-notes/
 ├── README.md             # 메인 목차 문서
 ├── .gitignore            # Delphi 7 임시 파일 제외 설정
 ├── docs/                 # 개념 정리 마크다운 문서 (.md)
+│   ├── 00-onboarding/
 │   ├── 01-basics/
 │   ├── 02-oop/
 │   ├── 03-memory/
