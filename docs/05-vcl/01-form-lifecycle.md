@@ -46,6 +46,41 @@
 
 ---
 
+## 🪟 폼의 종류를 결정하는 `FormStyle` 4가지 옵션!
+
+델파이 폼의 **`FormStyle`** 프로퍼티(속성)는 이 창이 어떤 유형의 창으로 동작할지 결정합니다.
+
+| FormStyle 옵션 | 의미 및 비유 | 실무 쓰임새 |
+| :--- | :--- | :--- |
+| **`fsNormal`** | **기본 일반 창** | 보통 다루는 가장 흔한 표준 독립 윈도우 창입니다. (기본값) |
+| **`fsMDIForm`** | **MDI 부모 액자 창** | **ERP 메인 화면!** 여러 개의 자식 창(`fsMDIChild`)을 내부에 다 담아서 관리하는 메인 큰 액자 창입니다. |
+| **`fsMDIChild`** | **MDI 자식 부속 창** | **ERP 메뉴 창!** 반드시 부모 창(`fsMDIForm`) 내부 영역 안에서만 생성되고 움직이는 서브 창입니다. |
+| **`fsStayOnTop`**| **항상 최상단 핀 창** | 다른 어떤 윈도우 창들보다 **무조건 맨 위에 항상 떠있는 창**입니다. (미니 툴바, 계산기, 시계, 팝업 알림창 등) |
+
+---
+
+## 🧩 MDI 폼 관리를 위한 델파이 내장 프로퍼티 (`MDIChildCount`, `MDIChildren`)
+
+폼을 **`FormStyle := fsMDIForm;` (MDI 부모 창)**으로 만드는 순간, 델파이 VCL 엔진이 내부에 열려 있는 자식 창들을 실시간 자동 추적해 주는 **2대 내장 프로퍼티**를 제공합니다.
+
+1. **`MDIChildCount`** (`Integer`): 현재 MDI 부모 창 내부에 열려 있는 자식 창(`fsMDIChild`)의 총 개수입니다.
+2. **`MDIChildren[Index]`** (`TForm` 배열): 0번부터 `MDIChildCount - 1`번까지 열려 있는 자식 창 객체들을 차례대로 담고 있는 **내장 폼 배열**입니다.
+
+### 💡 실무 ERP 중복 창 생성 방지 100점 코드:
+```pascal
+// 이미 열린 창이 있으면 새로 안 띄우고 앞으로(BringToFront) 가져오는 패턴
+for I := 0 to MDIChildCount - 1 do
+begin
+  if MDIChildren[I] is TFormUserMgmt then
+  begin
+    MDIChildren[I].BringToFront; // 이미 열려 있으므로 앞으로 포커스!
+    Exit;
+  end;
+end;
+```
+
+---
+
 ## 🎯 초초보자를 위한 실무 핵심 요약
 
 * 화면에 데이터를 처음 갱신해서 보여주고 싶다면 ➡️ **`OnShow`** 이벤트에 코드를 적으세요!

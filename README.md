@@ -80,4 +80,5 @@
 - [x] **[04_MemoryAndThread](examples/04_MemoryAndThread/README.md)**: `TThread` 멀티스레드 구현 및 `Synchronize` UI 동기화
 - [x] **[05_MSSQLADODemo](examples/05_MSSQLADODemo/README.md)**: MS-SQL Server DB 직접 연동(`TADOConnection`, `TADOQuery`) 및 데이터 조회
 - [x] **[06_ConfigMakerDemo](examples/06_ConfigMakerDemo/README.md)**: DB 접속 정보를 안전하게 암호화하여 `config.dat` 생성하는 미니 도구 예제
-- [x] **[07_ERPMenuDemo](examples/07_ERPMenuDemo/README.md)**: **(신규!)** ERP 대용량 메인 메뉴(`TMainMenu`, `TTreeView`, `TPopupMenu`) 구성 실습 예제
+- [x] **[07_ERPMenuDemo](examples/07_ERPMenuDemo/README.md)**: ERP 대용량 메인 메뉴(`TMainMenu`, `TTreeView`, `TPopupMenu`) 구성 실습 예제
+- [x] **[08_ERPMDIChildDemo](examples/08_ERPMDIChildDemo/README.md)**: **(신규!)** 진짜 ERP처럼 메뉴 클릭 시 MDI 자식 창(`FormStyle = fsMDIChild`) 생성 및 관리 실습 예제
