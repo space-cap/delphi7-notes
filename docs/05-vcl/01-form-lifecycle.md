@@ -81,6 +81,28 @@ end;
 
 ---
 
+## 🏠 폼 동적 생성 시 `Application`과 Owner(소유자)의 개념 (`Create(Application)`)
+
+코드에서 폼을 새로 띄울 때 `TForm.Create(AOwner)` 형태로 생성자를 호출합니다.
+
+```pascal
+// MDI 자식 폼 동적 생성 예시
+FormUserMgmt := TFormUserMgmt.Create(Application);
+```
+
+### 1) `Application` 변수는 어디에서 온 건가요?
+* **출처**: 델파이 기본 라이브러리인 **`Forms` 유닛**(`uses Forms;`)에 내장된 **전역 응용 프로그램 객체**입니다.
+* `uses Forms;` 절이 작성되어 있기 때문에 사용자가 선언할 필요 없이 프로그램 어디서나 즉시 사용할 수 있습니다.
+
+### 2) `Create(Application)` vs `Create(Self)` 소유자(Owner) 차이점!
+
+| 구 분 | 의미 및 작동 특징 |
+| :--- | :--- |
+| **`Create(Application)`** | 새로 띄우는 폼의 **주인(Owner)**을 **프로그램 전체(`Application`)**로 지정합니다. 프로그램이 완전히 종료될 때 델파이가 책임지고 이 폼을 메모리에서 해제(자동 청소)합니다. |
+| **`Create(Self)`** | 새로 띄우는 폼의 **주인(Owner)**을 **현재 폼(자기 자신)**으로 지정합니다. 현재 메인 폼이 파괴될 때 자식 폼도 함께 메모리에서 해제됩니다. |
+
+---
+
 ## 🎯 초초보자를 위한 실무 핵심 요약
 
 * 화면에 데이터를 처음 갱신해서 보여주고 싶다면 ➡️ **`OnShow`** 이벤트에 코드를 적으세요!
