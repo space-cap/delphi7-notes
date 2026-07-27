@@ -37,20 +37,20 @@ implementation
 
 procedure TFormDB.FormCreate(Sender: TObject);
 begin
-  Caption := 'Delphi 7 DataSet & DBGrid ì‹¤ìŠµ';
+  Caption := 'Delphi 7 DataSet & DBGrid ½Ç½À';
 
-  // ë©”ëª¨ë¦¬ ì¸ë©”ëª¨ë¦¬ DB ì»¬ëŸ¼ ì •ì˜ (ì´ë¦„, ë‚˜ì´)
+  // ¸Ş¸ğ¸® µ¥ÀÌÅÍ¼Â ÄÃ·³ Á¤ÀÇ (ID, NAME, AGE)
   ClientDataSet1.FieldDefs.Add('ID', ftInteger, 0, False);
   ClientDataSet1.FieldDefs.Add('NAME', ftString, 20, False);
   ClientDataSet1.FieldDefs.Add('AGE', ftInteger, 0, False);
-  ClientDataSet1.CreateDataSet; // DataSet ë°ì´í„° ìƒì„±
+  ClientDataSet1.CreateDataSet; // µ¥ÀÌÅÍ¼Â ÀÎ¸Ş¸ğ¸® »ı¼º
 
-  // ìƒ˜í”Œ ë°ì´í„° ì‚½ì…
-  ClientDataSet1.AppendRecord([1, 'ê¹€ì² ìˆ˜', 25]);
-  ClientDataSet1.AppendRecord([2, 'ì´ì˜í¬', 28]);
-  ClientDataSet1.AppendRecord([3, 'ë°•ë¯¼ìˆ˜', 30]);
+  // ÃÊ±â »ùÇÃ µ¥ÀÌÅÍ ÀÔ·Â
+  ClientDataSet1.AppendRecord([1, '±èÃ¶¼ö', 25]);
+  ClientDataSet1.AppendRecord([2, 'ÀÌ¿µÈñ', 28]);
+  ClientDataSet1.AppendRecord([3, '¹Ú¹Î¼ö', 30]);
 
-  // DataSourceì™€ DBGrid ë°”ì¸ë”© ì—°ê²°
+  // DataSource¿Í DBGrid ¹ÙÀÎµù ¿¬°á
   DataSource1.DataSet := ClientDataSet1;
   DBGrid1.DataSource := DataSource1;
 end;
@@ -61,20 +61,20 @@ var
 begin
   if Trim(EditName.Text) = '' then
   begin
-    ShowMessage('ì´ë¦„ì„ ì…ë ¥í•˜ì„¸ìš”.');
+    ShowMessage('ÀÌ¸§À» ÀÔ·ÂÇØ ÁÖ¼¼¿ä.');
     Exit;
   end;
 
   NewID := ClientDataSet1.RecordCount + 1;
   
-  // ë°ì´í„° ì¶”ê°€ (Append -> FieldByName -> Post)
+  // µ¥ÀÌÅÍ Ãß°¡ (Append -> FieldByName -> Post)
   ClientDataSet1.Append;
   ClientDataSet1.FieldByName('ID').AsInteger := NewID;
   ClientDataSet1.FieldByName('NAME').AsString := Trim(EditName.Text);
   ClientDataSet1.FieldByName('AGE').AsInteger := StrToIntDef(EditAge.Text, 20);
   ClientDataSet1.Post;
 
-  ShowMessage('ë°ì´í„°ê°€ ì„±ê³µì ìœ¼ë¡œ ì¶”ê°€ë˜ì—ˆìŠµë‹ˆë‹¤!');
+  ShowMessage('µ¥ÀÌÅÍ°¡ ¼º°øÀûÀ¸·Î Ãß°¡µÇ¾ú½À´Ï´Ù!');
 end;
 
 procedure TFormDB.BtnFirstClick(Sender: TObject);

@@ -8,7 +8,7 @@ object FormDB: TFormDB
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -12
-  Font.Name = 'Íµ¥Î¶º'
+  Font.Name = '±º∏≤'
   Font.Style = []
   OldCreateOrder = False
   OnCreate = FormCreate
@@ -19,14 +19,14 @@ object FormDB: TFormDB
     Top = 20
     Width = 28
     Height = 12
-    Caption = 'Ïù¥Î¶Ñ:'
+    Caption = '¿Ã∏ß:'
   end
   object LabelAge: TLabel
     Left = 174
     Top = 20
     Width = 28
     Height = 12
-    Caption = 'ÎÇòÏù¥:'
+    Caption = '≥™¿Ã:'
   end
   object EditName: TEdit
     Left = 56
@@ -46,50 +46,50 @@ object FormDB: TFormDB
   object BtnAdd: TButton
     Left = 280
     Top = 14
-    Width = 75
+    Width = 65
     Height = 25
-    Caption = 'Ï∂îÍ∞ÄÌïòÍ∏∞'
+    Caption = '√ﬂ∞°'
     TabOrder = 2
     OnClick = BtnAddClick
   end
-  object DBGrid1: TDBGrid
-    Left = 24
-    Top = 50
-    Width = 450
-    Height = 250
-    TabOrder = 3
-    TitleFont.Charset = DEFAULT_CHARSET
-    TitleFont.Color = clWindowText
-    TitleFont.Height = -12
-    TitleFont.Name = 'Íµ¥Î¶º'
-    TitleFont.Style = []
-  end
   object BtnFirst: TButton
-    Left = 24
-    Top = 315
-    Width = 90
+    Left = 355
+    Top = 14
+    Width = 65
     Height = 25
-    Caption = 'Îß® Ï≤òÏùå (First)'
-    TabOrder = 4
+    Caption = '√≥¿Ω¿∏∑Œ'
+    TabOrder = 3
     OnClick = BtnFirstClick
   end
   object BtnNext: TButton
-    Left = 124
-    Top = 315
-    Width = 90
+    Left = 425
+    Top = 14
+    Width = 65
     Height = 25
-    Caption = 'Îã§Ïùå (Next)'
-    TabOrder = 5
+    Caption = '¥Ÿ¿Ω¿∏∑Œ'
+    TabOrder = 4
     OnClick = BtnNextClick
+  end
+  object DBGrid1: TDBGrid
+    Left = 24
+    Top = 55
+    Width = 465
+    Height = 280
+    TabOrder = 5
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -12
+    TitleFont.Name = '±º∏≤'
+    TitleFont.Style = []
   end
   object ClientDataSet1: TClientDataSet
     Aggregates = <>
     Params = <>
-    Left = 380
-    Top = 12
+    Left = 48
+    Top = 80
   end
   object DataSource1: TDataSource
-    Left = 420
-    Top = 12
+    Left = 88
+    Top = 80
   end
 end

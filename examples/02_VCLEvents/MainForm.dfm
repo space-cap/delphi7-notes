@@ -37,6 +37,15 @@ object FormMain: TFormMain
     TabOrder = 1
     OnClick = BtnGreetClick
   end
+  object BtnClear: TButton
+    Left = 340
+    Top = 18
+    Width = 65
+    Height = 25
+    Caption = '√ ±‚»≠'
+    TabOrder = 3
+    OnClick = BtnClearClick
+  end
   object MemoLog: TMemo
     Left = 24
     Top = 60

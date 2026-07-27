@@ -50,5 +50,5 @@
 
 ---
 
-* **이전 단계**: [04-4. 한글 2Byte(CP949) 처리 및 문자열 잘림(자소 파괴) 방지](../04-data/04-korean-bytes.md)
+* **이전 단계**: [05-0. 델파이 7 컴포넌트 팔레트(Component Palette) 탭별 완벽 가이드](00-component-palette-guide.md)
 * **다음 단계**: [05-2. 기본 VCL 컴포넌트 제어 (Button, Edit, Memo 등)](02-basic-components.md)

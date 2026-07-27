@@ -8,7 +8,7 @@ object FormThread: TFormThread
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -12
-  Font.Name = 'êµ´ë¦¼'
+  Font.Name = '±¼¸²'
   Font.Style = []
   OldCreateOrder = False
   OnCreate = FormCreate
@@ -19,7 +19,7 @@ object FormThread: TFormThread
     Top = 20
     Width = 72
     Height = 12
-    Caption = 'ì§„í–‰ë¥ : 0%'
+    Caption = 'ÁøÇà·ü: 0%'
   end
   object ProgressBar1: TProgressBar
     Left = 24
@@ -33,7 +33,7 @@ object FormThread: TFormThread
     Top = 80
     Width = 160
     Height = 30
-    Caption = 'ìŠ¤ë ˆë“œ ë‹¤ìš´ë¡œë“œ ì‹œìž‘'
+    Caption = '½º·¹µå ´Ù¿î·Îµå ½ÃÀÛ'
     TabOrder = 1
     OnClick = BtnStartThreadClick
   end

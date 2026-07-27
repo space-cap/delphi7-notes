@@ -7,7 +7,7 @@ uses
   Dialogs, StdCtrls, ComCtrls;
 
 type
-  // ë°±ê·¸ë¼ìš´ë“œ ì‘ì—…ì„ ë‹´ë‹¹í•  ì„œë¸Œ ìŠ¤ë ˆë“œ í´ë˜ìŠ¤ ì •ì˜
+  // ¹é±×¶ó¿îµå ÀÛ¾÷À» Ã³¸®ÇÒ TThread ¼­ºê Å¬·¡½º Á¤ÀÇ
   TDownloadThread = class(TThread)
   private
     FProgress: Integer;
@@ -42,29 +42,29 @@ procedure TDownloadThread.Execute;
 var
   I: Integer;
 begin
-  // 1%ë¶€í„° 100%ê¹Œì§€ 0.05ì´ˆ ê°„ê²©ìœ¼ë¡œ ì§„í–‰ (ì´ 5ì´ˆ ì‘ì—…)
+  // 1%ºÎÅÍ 100%±îÁö 0.05ÃÊ °£°İÀ¸·Î ÁøÇà (ÃÑ 5ÃÊ ¼Ò¿ä)
   for I := 1 to 100 do
   begin
     if Terminated then Break;
 
     FProgress := I;
     
-    // â˜… ë©”ì¸ UIë¥¼ ìˆ˜ì •í•˜ê¸° ìœ„í•´ Synchronize í˜¸ì¶œ!
+    // ¸ŞÀÎ UI¸¦ ¾÷µ¥ÀÌÆ®ÇÏ±â À§ÇØ Synchronize È£Ãâ!
     Synchronize(UpdateUI);
     
-    Sleep(50); // 50ms ëŒ€ê¸° (ë¹„í•˜ì¸ë“œì—ì„œ ì¼í•¨!)
+    Sleep(50); // 50ms ´ë±â (ºñµ¿±â ÀÛ¾÷ ½Ã¹Ä·¹ÀÌ¼Ç!)
   end;
 end;
 
 procedure TDownloadThread.UpdateUI;
 begin
-  // Synchronize ì•ˆì—ì„œ í˜¸ì¶œë˜ì–´ ë©”ì¸ UIë¥¼ ì•ˆì „í•˜ê²Œ ìˆ˜ì •!
+  // Synchronize ³»ºÎ¿¡¼­ È£ÃâµÇ¹Ç·Î ¸ŞÀÎ UI¸¦ ¾ÈÀüÇÏ°Ô ¼öÁ¤!
   FormThread.ProgressBar1.Position := FProgress;
-  FormThread.LabelStatus.Caption := 'ì§„í–‰ë¥ : ' + IntToStr(FProgress) + '%';
+  FormThread.LabelStatus.Caption := 'ÁøÇà·ü: ' + IntToStr(FProgress) + '%';
   
   if FProgress = 100 then
   begin
-    FormThread.MemoLog.Lines.Add('=== ë¹„ë™ê¸° ìŠ¤ë ˆë“œ ì‘ì—…ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤! ===');
+    FormThread.MemoLog.Lines.Add('=== ºñµ¿±â ´Ù¿î·Îµå°¡ ¿Ï·áµÇ¾ú½À´Ï´Ù! ===');
     FormThread.BtnStartThread.Enabled := True;
   end;
 end;
@@ -73,8 +73,8 @@ end;
 
 procedure TFormThread.FormCreate(Sender: TObject);
 begin
-  Caption := 'Delphi 7 ë©€í‹°ìŠ¤ë ˆë“œ(TThread) & UI ë™ê¸°í™” ì‹¤ìŠµ';
-  LabelStatus.Caption := 'ì§„í–‰ë¥ : 0%';
+  Caption := 'Delphi 7 ¸ÖÆ¼½º·¹µå(TThread) & UI µ¿±âÈ­ ½Ç½À';
+  LabelStatus.Caption := 'ÁøÇà·ü: 0%';
   ProgressBar1.Position := 0;
 end;
 
@@ -83,12 +83,12 @@ var
   WorkerThread: TDownloadThread;
 begin
   BtnStartThread.Enabled := False;
-  MemoLog.Lines.Add('=== ìŠ¤ë ˆë“œ ë‹¤ìš´ë¡œë“œ ì‹œì‘ (í™”ë©´ ë©ˆì¶¤ ì—†ìŒ!) ===');
+  MemoLog.Lines.Add('=== ½º·¹µå ´Ù¿î·Îµå ½ÃÀÛ (È­¸é ¸ØÃã ¾øÀ½!) ===');
   ProgressBar1.Position := 0;
 
-  // ìŠ¤ë ˆë“œ ìƒì„± ë° ì‹¤í–‰ (CreateSuspended = False)
+  // ½º·¹µå »ı¼º ¹× ½ÇÇà (CreateSuspended = False)
   WorkerThread := TDownloadThread.Create(False);
-  WorkerThread.FreeOnTerminate := True; // ì‘ì—… ì™„ë£Œ í›„ ë©”ëª¨ë¦¬ ìë™ í•´ì œ!
+  WorkerThread.FreeOnTerminate := True; // ½º·¹µå Á¾·á ½Ã ¸Ş¸ğ¸® ÀÚµ¿ ÇØÁ¦!
 end;
 
 end.
