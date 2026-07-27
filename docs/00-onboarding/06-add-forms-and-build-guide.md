@@ -117,4 +117,4 @@ end;
 ---
 
 * **이전 단계**: [00-5. 델파이 빌드 환경 및 실행 옵션](05-build-environment.md)
-* **다음 단계**: [01-1. 파스칼 유닛(Unit)의 기본 구조](../01-basics/01-unit-structure.md)
+* **다음 단계**: [00-7. VS Code에서 델파이 7 한글 깨짐 방지 설정 가이드](07-vscode-encoding-setup.md)

@@ -45,13 +45,4 @@ object FormMain: TFormMain
     ScrollBars = ssVertical
     TabOrder = 2
   end
-  object BtnClear: TButton
-    Left = 319
-    Top = 270
-    Width = 85
-    Height = 25
-    Caption = '로그 지우기'
-    TabOrder = 3
-    OnClick = BtnClearClick
-  end
 end
