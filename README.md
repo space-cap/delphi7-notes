@@ -39,6 +39,8 @@
 - [x] [04-4. 한글 2Byte(CP949) 처리 및 문자열 잘림(자소 파괴) 방지](docs/04-data/04-korean-bytes.md)
 
 ### 5. VCL & GUI 프로그래밍 (UI)
+- [x] [05. 델파이 VCL (Visual Component Library) 완벽 개념 가이드](docs/05-vcl/README.md)
+- [x] [05-0. 델파이 7 컴포넌트 팔레트 탭별 완벽 가이드](docs/05-vcl/00-component-palette-guide.md)
 - [x] [05-1. 폼(Form) 생명주기와 주요 이벤트](docs/05-vcl/01-form-lifecycle.md)
 - [x] [05-2. 기본 VCL 컴포넌트 제어 (Button, Edit, Memo 등)](docs/05-vcl/02-basic-components.md)
 - [x] [05-3. 동적 컴포넌트 생성 및 이벤트 연결](docs/05-vcl/03-dynamic-components.md)
@@ -77,5 +79,5 @@
 - [x] **[03_ADODatabase](examples/03_ADODatabase/README.md)**: `TClientDataSet` 인메모리 데이터셋 및 `TDBGrid` 연결
 - [x] **[04_MemoryAndThread](examples/04_MemoryAndThread/README.md)**: `TThread` 멀티스레드 구현 및 `Synchronize` UI 동기화
 - [x] **[05_MSSQLADODemo](examples/05_MSSQLADODemo/README.md)**: MS-SQL Server DB 직접 연동(`TADOConnection`, `TADOQuery`) 및 데이터 조회
-- [x] **[06_ConfigMakerDemo](examples/06_ConfigMakerDemo/README.md)**: **(신규!)** DB 접속 정보를 안전하게 암호화하여 `config.dat` 생성하는 미니 도구 예제
-
+- [x] **[06_ConfigMakerDemo](examples/06_ConfigMakerDemo/README.md)**: DB 접속 정보를 안전하게 암호화하여 `config.dat` 생성하는 미니 도구 예제
+- [x] **[07_ERPMenuDemo](examples/07_ERPMenuDemo/README.md)**: **(신규!)** ERP 대용량 메인 메뉴(`TMainMenu`, `TTreeView`, `TPopupMenu`) 구성 실습 예제
