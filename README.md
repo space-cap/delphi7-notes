@@ -52,6 +52,7 @@
 - [x] [07-1. TADOConnection 및 TADOQuery 기초](docs/07-database/01-ado-basics.md)
 - [x] [07-2. TDataSet 조작 (First, Next, Edit, Post, FieldByName)](docs/07-database/02-dataset-operations.md)
 - [x] [07-3. TDBGrid 및 데이터 바인딩 컴포넌트 활용](docs/07-database/03-dbgrid-binding.md)
+- [x] [07-4. config.dat 암호화 파일을 이용한 실무 DB 접속 관리](docs/07-database/04-secure-db-config.md)
 
 ### 8. 파일 처리 & 네트워크 (File I/O & Network) 📁
 - [x] [08-1. TIniFile 및 TFileStream 활용법](docs/08-file-network/01-inifile-and-stream.md)
@@ -66,3 +67,15 @@
 - [x] [10-1. 커스텀 VCL 컴포넌트 제작 기초](docs/10-advanced/01-custom-component.md)
 - [x] [10-2. FastMM4를 이용한 메모리 누수(Memory Leak) 추적](docs/10-advanced/01-fastmm4-debugging.md)
 - [x] [10-3. 멀티스레딩(TThread)과 UI 동기화(Synchronize)](docs/10-advanced/03-multithreading.md)
+
+---
+
+## 🧪 예제 프로젝트 모음 (`examples/`)
+
+- [x] **[01_BasicSyntax](examples/01_BasicSyntax/README.md)**: 기본 파스칼 문법, 함수/프로시저, `TStringList` 메모리 해제 패턴
+- [x] **[02_VCLEvents](examples/02_VCLEvents/README.md)**: VCL 이벤트(`OnClick`, `OnCreate`) 및 폼 컴포넌트 제어
+- [x] **[03_ADODatabase](examples/03_ADODatabase/README.md)**: `TClientDataSet` 인메모리 데이터셋 및 `TDBGrid` 연결
+- [x] **[04_MemoryAndThread](examples/04_MemoryAndThread/README.md)**: `TThread` 멀티스레드 구현 및 `Synchronize` UI 동기화
+- [x] **[05_MSSQLADODemo](examples/05_MSSQLADODemo/README.md)**: MS-SQL Server DB 직접 연동(`TADOConnection`, `TADOQuery`) 및 데이터 조회
+- [x] **[06_ConfigMakerDemo](examples/06_ConfigMakerDemo/README.md)**: **(신규!)** DB 접속 정보를 안전하게 암호화하여 `config.dat` 생성하는 미니 도구 예제
+
