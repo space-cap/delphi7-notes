@@ -5,13 +5,13 @@ program BasicSyntaxDemo;
 uses
   SysUtils, Classes;
 
-// 1. 함수 선언 (결과값을 리턴하는 함수)
+// 1. 함수 정의 (반환값이 존재하는 함수)
 function AddNumbers(A, B: Integer): Integer;
 begin
   Result := A + B;
 end;
 
-// 2. 프로시저 선언 (일만 수행하는 프로시저)
+// 2. 프로시저 정의 (반환값이 없는 프로시저)
 procedure PrintHeader(Title: String);
 begin
   Writeln('========================================');
@@ -26,7 +26,7 @@ begin
   // 헤더 출력
   PrintHeader('Delphi 7 기본 문법 & TStringList 실습');
 
-  // [실습 1] 변수 및 사칙 연산
+  // [실습 1] 함수 호출 및 결과 출력
   Total := AddNumbers(15, 25);
   Writeln('1. AddNumbers(15, 25) 결과: ', Total);
   Writeln;
@@ -39,8 +39,8 @@ begin
   end;
   Writeln;
 
-  // [실습 3] TStringList 및 try...finally 안전한 객체 관리
-  Writeln('3. TStringList 활용 및 메모리 안전 해제:');
+  // [실습 3] TStringList 및 try...finally를 이용한 객체 해제
+  Writeln('3. TStringList 활용 및 메모리 해제 실습:');
   FruitList := TStringList.Create; // 객체 생성
   try
     FruitList.Add('사과 (Apple)');
@@ -54,10 +54,10 @@ begin
     end;
   finally
     FruitList.Free; // 메모리 해제!
-    Writeln('   -> FruitList 메모리가 안전하게 해제되었습니다.');
+    Writeln('   -> FruitList 객체가 성공적으로 해제되었습니다.');
   end;
 
   Writeln;
-  Writeln('엔터 키(Enter)를 누르면 프로그램이 종료됩니다...');
+  Writeln('엔터 키(Enter)를 누르면 프로그램을 종료합니다...');
   Readln;
 end.

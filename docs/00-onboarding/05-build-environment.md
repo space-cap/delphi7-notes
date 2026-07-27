@@ -47,4 +47,4 @@
 ---
 
 * **이전 단계**: [00-4. DFM 파일 관리 및 Git 형상관리 주의사항 (Text DFM 설정)](04-dfm-and-git.md)
-* **다음 단계**: [01-1. 유닛 구조 (interface & implementation)](../01-basics/01-unit-structure.md)
+* **다음 단계**: [00-6. [왕초보 가이드] 델파이 7에서 폼 2개 추가하고 빌드(실행)하기](06-add-forms-and-build-guide.md)
