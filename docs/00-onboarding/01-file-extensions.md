@@ -13,13 +13,45 @@
 
 ---
 
-### 1. 🔑 `.dpr` (Delphi Project File) - "집 전체 건설 총감독 문서"
+### 1. 🔑 `.dpr` (Delphi Project File) - "집 전체 건설 총감독 문서 & 시작점"
 * **원래 이름**: Delphi Project (델파이 프로젝트)
 * **쉬운 비유**: **"집의 건물 전체 설계도 & 대문"**
 * **역할**: 
-  - 프로그램이 처음 시작될 때 **가장 먼저 열리는 파일**입니다.
-  - "이 프로그램에는 A화면, B화면이 있고, 제일 먼저 A화면을 띄워라!" 하고 전체를 총괄하는 역할을 합니다.
-* **초보자 팁**: 보통 델파이 프로그램을 열 때 이 `.dpr` 파일을 닥블클릭해서 엽니다!
+  - 프로그램이 처음 실행될 때 **가장 먼저 실행되는 파일(Entry Point)**입니다.
+  - 프로그램 초기화, 화면(Form) 생성, 메인 루프 실행 등 전체적인 구동 흐름을 관리합니다.
+* **초보자 팁**: 보통 델파이 프로젝트를 열 때 이 `.dpr` 파일을 더블클릭해서 엽니다!
+
+#### 🚀 [상세] 델파이는 실행하면 뭐가 먼저 실행되고 시작 화면은 어떻게 정해지나요?
+
+**1) 프로그램 실행 4단계 흐름 (`.dpr` 내부 소스 코드)**
+`.dpr` 파일을 열어보면 아래처럼 `begin ... end.` 블록이 있습니다. 프로그램이 켜지면 위에서부터 차례대로 실행됩니다.
+
+```pascal
+program Project1;
+
+uses
+  Forms,
+  MainForm in 'MainForm.pas' {FormMain},
+  SubForm in 'SubForm.pas' {FormSub};
+
+{$R *.res}
+
+begin
+  Application.Initialize;                  // [1단계] 응용 프로그램 초기화
+  Application.CreateForm(TFormMain, FormMain); // [2단계] 메인 폼 생성 (★ 가장 먼저 작성된 폼!)
+  Application.CreateForm(TFormSub, FormSub);   // [3단계] 서브 폼 생성
+  Application.Run;                         // [4단계] 화면 띄우고 메인 이벤트 루프 시작!
+end.
+```
+
+**2) 시작 화면(Main Form)이 정해지는 2가지 원리**
+* **원리 1: 코드 순서 (`.dpr`)**
+  `Application.CreateForm` 함수 중 **가장 첫 번째로 구동/생성되는 폼**이 자동으로 프로그램의 **시작 화면(MainForm)**이 됩니다.
+* **원리 2: IDE 메뉴에서 변경하기 (`Project Options`)**
+  1. 델파이 상단 메뉴 **`Project` ➔ `Options`** (단축키: `Ctrl + Shift + F11`) 선택
+  2. 왼쪽 **`Forms`** 탭 선택
+  3. **`Main form`** 드롭다운에서 시작 화면으로 지정할 폼 선택 후 **OK**
+  *(※ IDE에서 변경하면 델파이가 `.dpr` 파일 내의 `CreateForm` 순서를 자동으로 조정해 줍니다!)*
 
 ---
 
