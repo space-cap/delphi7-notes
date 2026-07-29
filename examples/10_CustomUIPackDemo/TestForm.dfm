@@ -17,7 +17,7 @@ object FormTest: TFormTest
   object LabelTitle: TLabel
     Left = 24
     Top = 20
-    Width = 280
+    Width = 320
     Height = 15
     Caption = '[이미지 속 알약 형태 보라색 커스텀 버튼 테스트]'
     Font.Charset = DEFAULT_CHARSET
@@ -30,7 +30,7 @@ object FormTest: TFormTest
   object LabelGuide: TLabel
     Left = 24
     Top = 48
-    Width = 350
+    Width = 360
     Height = 12
     Caption = '아래 보라색 커스텀 버튼에 마우스를 올리고 클릭해 보세요!'
     Font.Charset = DEFAULT_CHARSET
@@ -40,12 +40,27 @@ object FormTest: TFormTest
     Font.Style = []
     ParentFont = False
   end
+  object ModernButton1: TModernButton
+    Left = 24
+    Top = 80
+    Width = 180
+    Height = 45
+    Caption = '+ 신규 수주 등록'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWhite
+    Font.Height = -13
+    Font.Name = '굴림'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 0
+    OnClick = BtnNewOrderClick
+  end
   object MemoLog: TMemo
     Left = 24
     Top = 150
     Width = 430
     Height = 150
     ScrollBars = ssVertical
-    TabOrder = 0
+    TabOrder = 1
   end
 end

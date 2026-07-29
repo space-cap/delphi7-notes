@@ -32,6 +32,7 @@ type
     property CornerRadius: Integer read FCornerRadius write SetCornerRadius default 22;
     property Caption;
     property Font;
+    property ParentFont; // DFM 읽기 에러 방지용 ParentFont 프로퍼티 노출!
     property Enabled;
     property Visible;
     property OnClick;
@@ -43,14 +44,13 @@ implementation
 
 procedure Register;
 begin
-  // 델파이 컴포넌트 팔레트 상단 'MyCustomPack' 탭에 등록!
   RegisterComponents('MyCustomPack', [TModernButton]);
 end;
 
 constructor TModernButton.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
-  FBGColor := $00E14B5C;     // 보라색 ($5CB4E1 -> BGR)
+  FBGColor := $00E14B5C;     // 보라색
   FHoverColor := $00F06675;  // 밝은 보라색
   FTextColor := clWhite;
   FCornerRadius := 22;       // 동글동글 모서리
@@ -97,7 +97,6 @@ begin
   end;
 end;
 
-// 마우스 진입 메세지 처리 (호버 효과)
 procedure TModernButton.CMMouseEnter(var Message: TMessage);
 begin
   inherited;
@@ -105,7 +104,6 @@ begin
   Invalidate;
 end;
 
-// 마우스 이탈 메세지 처리
 procedure TModernButton.CMMouseLeave(var Message: TMessage);
 begin
   inherited;
@@ -118,7 +116,6 @@ begin
   inherited Click;
 end;
 
-// 화면 그리기 (Paint 메서드 오버라이드)
 procedure TModernButton.Paint;
 var
   CurrentBG: TColor;
@@ -126,29 +123,25 @@ var
 begin
   Canvas.Brush.Style := bsSolid;
 
-  // 마우스 호버 여부에 따른 배경색 결정
   if FIsMouseHover then
     CurrentBG := FHoverColor
   else
     CurrentBG := FBGColor;
 
-  // 1. 투명 영역 칠하기 (부모 배경색)
   if Parent <> nil then
   begin
     Canvas.Brush.Color := TForm(Parent).Color;
     Canvas.FillRect(ClientRect);
   end;
 
-  // 2. 동글동글 모서리 배경 칠하기
   Canvas.Brush.Color := CurrentBG;
   Canvas.Pen.Color := CurrentBG;
   Canvas.Pen.Width := 1;
   Canvas.RoundRect(0, 0, Width, Height, FCornerRadius, FCornerRadius);
 
-  // 3. 중앙 텍스트(Caption) 그리기
   Canvas.Font := Font;
   Canvas.Font.Color := FTextColor;
-  Canvas.Brush.Style := bsClear; // 글자 배경 투명
+  Canvas.Brush.Style := bsClear;
 
   R := ClientRect;
   DrawText(Canvas.Handle, PChar(Caption), -1, R, DT_SINGLELINE or DT_CENTER or DT_VCENTER);

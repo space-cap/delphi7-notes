@@ -11,9 +11,9 @@ type
     LabelTitle: TLabel;
     LabelGuide: TLabel;
     MemoLog: TMemo;
+    ModernButton1: TModernButton;
     procedure FormCreate(Sender: TObject);
   private
-    BtnNewOrder: TModernButton;
     procedure BtnNewOrderClick(Sender: TObject);
   public
     { Public declarations }
@@ -29,21 +29,13 @@ implementation
 procedure TFormTest.FormCreate(Sender: TObject);
 begin
   MemoLog.Lines.Clear;
-  MemoLog.Lines.Add('=== 커스텀 TModernButton 컴포넌트가 동적 생성되었습니다. ===');
+  MemoLog.Lines.Add('=== TModernButton 커스텀 UI 버튼 준비 완료 ===');
 
-  // 이미지 속 알약 형태 보라색 커스텀 버튼을 동적으로 폼에 생성!
-  BtnNewOrder := TModernButton.Create(Self);
-  BtnNewOrder.Parent := Self;
-  BtnNewOrder.Left := 24;
-  BtnNewOrder.Top := 80;
-  BtnNewOrder.Width := 180;
-  BtnNewOrder.Height := 45;
-  BtnNewOrder.Caption := '+ 신규 수주 등록';
-  BtnNewOrder.Font.Name := '굴림';
-  BtnNewOrder.Font.Style := [fsBold];
-  BtnNewOrder.Font.Size := 10;
-  BtnNewOrder.CornerRadius := 35; // 알약 모양 동글동글 라운딩
-  BtnNewOrder.OnClick := BtnNewOrderClick;
+  // 1. 디자이너 모드 폼에 배치된 ModernButton1 클릭 이벤트 연결
+  if ModernButton1 <> nil then
+  begin
+    ModernButton1.OnClick := BtnNewOrderClick;
+  end;
 end;
 
 procedure TFormTest.BtnNewOrderClick(Sender: TObject);
