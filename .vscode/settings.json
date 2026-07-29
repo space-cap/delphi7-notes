@@ -5,7 +5,8 @@
     "*.dpr": "pascal",
     "*.dpk": "pascal",
     "*.ini": "ini",
-    "*.template": "ini"
+    "*.template": "ini",
+    "*.rc": "pascal"
   },
   "files.encoding": "utf8",
   "[pascal]": {
