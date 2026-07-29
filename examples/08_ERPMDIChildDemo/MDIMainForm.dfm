@@ -1,14 +1,14 @@
 object FormMDIMain: TFormMDIMain
-  Left = 200
-  Top = 120
-  Width = 800
+  Left = 682
+  Top = 160
+  Width = 692
   Height = 600
-  Caption = '진짜 ERP 시스템 MDI 메인 화면'
-  Color = clAppWorkspace
+  Caption = #51652#51676' ERP '#49884#49828#53596' MDI '#47700#51064' '#54868#47732
+  Color = clAppWorkSpace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -12
-  Font.Name = '굴림'
+  Font.Name = #44404#47548
   Font.Style = []
   FormStyle = fsMDIForm
   Menu = MainMenu1
@@ -19,55 +19,54 @@ object FormMDIMain: TFormMDIMain
   object StatusBar1: TStatusBar
     Left = 0
     Top = 521
-    Width = 784
+    Width = 676
     Height = 20
     Panels = <
       item
-        Text = 'ERP MDI 시스템 작동 중'
+        Text = 'ERP MDI '#49884#49828#53596' '#51089#46041' '#51473
         Width = 250
       end
       item
-        Text = '열린 자식 창: 0개'
+        Text = #50676#47536' '#51088#49885' '#52285': 0'#44060
         Width = 200
       end>
-    SimplePanel = False
   end
   object MainMenu1: TMainMenu
     Left = 40
     Top = 40
     object MenuSystem: TMenuItem
-      Caption = '시스템 관리(&S)'
+      Caption = #49884#49828#53596' '#44288#47532'(&S)'
       object MenuUserMgmt: TMenuItem
-        Caption = '사용자 관리 창 열기(&U)'
+        Caption = #49324#50857#51088' '#44288#47532' '#52285' '#50676#44592'(&U)'
         OnClick = MenuUserMgmtClick
       end
       object N1: TMenuItem
         Caption = '-'
       end
       object MenuExit: TMenuItem
-        Caption = '종료(&X)'
+        Caption = #51333#47308'(&X)'
         OnClick = MenuExitClick
       end
     end
     object MenuSales: TMenuItem
-      Caption = '영업 관리(&M)'
+      Caption = #50689#50629' '#44288#47532'(&M)'
       object MenuOrderReg: TMenuItem
-        Caption = '주문 등록 창 열기(&O)'
+        Caption = #51452#47928' '#46321#47197' '#52285' '#50676#44592'(&O)'
         OnClick = MenuOrderRegClick
       end
     end
     object MenuWindow: TMenuItem
-      Caption = '창 관리(&W)'
+      Caption = #52285' '#44288#47532'(&W)'
       object MenuCascade: TMenuItem
-        Caption = '계단식 정렬(&C)'
+        Caption = #44228#45800#49885' '#51221#47148'(&C)'
         OnClick = MenuCascadeClick
       end
       object MenuTile: TMenuItem
-        Caption = '바둑판 정렬(&T)'
+        Caption = #48148#46161#54032' '#51221#47148'(&T)'
         OnClick = MenuTileClick
       end
       object MenuCloseAll: TMenuItem
-        Caption = '열린 창 모두 닫기(&A)'
+        Caption = #50676#47536' '#52285' '#47784#46160' '#45803#44592'(&A)'
         OnClick = MenuCloseAllClick
       end
     end
