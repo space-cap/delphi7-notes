@@ -9,6 +9,7 @@ uses
 type
   TFormLogin = class(TForm)
     PanelHeader: TPanel;
+    ImageLogo: TImage;
     LabelTitle: TLabel;
     LabelSubtitle: TLabel;
     LabelUserID: TLabel;
@@ -30,6 +31,7 @@ type
     FLoggedInUserName: string;
     FLoggedInUserRole: string;
     function AuthenticateUser(const AUserID, AUserPW: string): Boolean;
+    procedure LoadCompanyLogo;
   public
     property LoggedInUserID: string read FLoggedInUserID;
     property LoggedInUserName: string read FLoggedInUserName;
@@ -56,18 +58,41 @@ begin
 
   EditUserID.Text := 'admin';
   EditUserPW.Text := 'admin123!';
+
+  // 회사 로고 이미지 불러오기
+  LoadCompanyLogo;
+end;
+
+procedure TFormLogin.LoadCompanyLogo;
+var
+  LogoPath: string;
+begin
+  // 실행 폴더 및 소스 폴더 경로 탐색
+  LogoPath := ExtractFilePath(Application.ExeName) + 'company_logo.bmp';
+  if not FileExists(LogoPath) then
+    LogoPath := ExtractFilePath(ExtractFileDir(Application.ExeName)) + '\company_logo.bmp';
+
+  if FileExists(LogoPath) then
+  begin
+    try
+      ImageLogo.Picture.LoadFromFile(LogoPath);
+      ImageLogo.Stretch := True;
+      ImageLogo.Proportional := True;
+      ImageLogo.Center := True;
+    except
+      // 로고 이미지 로딩 실패 시 예외 무시
+    end;
+  end;
 end;
 
 function TFormLogin.AuthenticateUser(const AUserID, AUserPW: string): Boolean;
 begin
   Result := False;
 
-  // 전역 DataModuleMain의 공통 DB 커넥션 사용!
   if not DataModuleMain.ConnectDB then Exit;
 
   try
     ADOQueryLogin.Close;
-    // [핵심] DataModuleMain의 ADOConnection1 재활용!
     ADOQueryLogin.Connection := DataModuleMain.ADOConnection1;
     ADOQueryLogin.SQL.Clear;
     ADOQueryLogin.SQL.Add('SELECT User_ID, User_Name, User_Role, Is_Active');

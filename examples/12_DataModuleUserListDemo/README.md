@@ -21,15 +21,20 @@
 
 ---
 
-## 🏗️ 커넥션 재활용 아키텍처 흐름
+## 🏗️ 다중 DB(유저 DB, 재고 DB 등 2개 이상) 사용 시 설계 가이드
 
-```text
-[DataModuleMain (DataModule.pas)] 
-   └── ADOConnection1 (전역 1개 DB 커넥션 유지)
-          ├── LoginForm.pas (로그인 검증 시 공유)
-          ├── UserListForm.pas (유저 목록 TDBGrid 조회 시 공유)
-          └── 기타 추가될 서브 화면들 (공유)
-```
+> **Q. 만약 DB를 2개(예: 유저 DB, 재고 DB) 사용한다면 TDataModule도 2개를 만들어야 하나요?**
+>
+> **A. 2가지 방식 모두 가능하며, 프로젝트 규모와 팀 개발 방식에 따라 선택합니다!**
+
+### 💡 방식 1. 1개의 TDataModule 안에 TADOConnection 2개 배치 (중소규모 추천)
+- `DM.pas` 하나에 `ADOConnectionUser` (유저 DB용)와 `ADOConnectionStock` (재고 DB용) 2개를 올려놓고 관리합니다.
+- **장점**: 데이터 모듈 파일 1개만 관리하므로 커넥션 초기화/관리 코드가 한곳에 모여 편리합니다.
+
+### 💡 방식 2. TDataModule을 2개로 분리 (대규모 ERP / 모듈별 독립 개발 추천)
+- `DMUser.pas` (유저/인사 시스템 DB 전용 DataModule)
+- `DMStock.pas` (재고/물류 시스템 DB 전용 DataModule)
+- **장점**: 유저 모듈 개발자와 재고 모듈 개발자가 서로 다른 파일(`DMUser`, `DMStock`)을 다루므로 **Git/SVN 소스 충돌이 없고 업무 독립성이 매우 뛰어납니다.**
 
 ---
 

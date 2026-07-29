@@ -61,8 +61,17 @@ object FormLogin: TFormLogin
     Align = alTop
     Color = clNavy
     TabOrder = 0
+    object ImageLogo: TImage
+      Left = 12
+      Top = 10
+      Width = 46
+      Height = 46
+      Center = True
+      Proportional = True
+      Stretch = True
+    end
     object LabelTitle: TLabel
-      Left = 24
+      Left = 68
       Top = 14
       Width = 190
       Height = 18
@@ -75,7 +84,7 @@ object FormLogin: TFormLogin
       ParentFont = False
     end
     object LabelSubtitle: TLabel
-      Left = 24
+      Left = 68
       Top = 38
       Width = 237
       Height = 12
