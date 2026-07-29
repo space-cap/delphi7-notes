@@ -18,4 +18,5 @@
 | **08** | [`08_ERPMDIChildDemo`](file:///c:/workdir/space-cap/delphi7-notes/examples/08_ERPMDIChildDemo) | MDI 자식 폼 형태의 ERP 서브 화면 예제 |
 | **09** | [`09_TabbedMDIERP`](file:///c:/workdir/space-cap/delphi7-notes/examples/09_TabbedMDIERP) | 탭(Tab) 기반 MDI ERP 폼 인터페이스 실습 |
 | **10** | [`10_CustomUIPackDemo`](file:///c:/workdir/space-cap/delphi7-notes/examples/10_CustomUIPackDemo) | TModernButton 커스텀 VCL 패키지 제작 및 컴포넌트 실습 |
-| **11** | [`11_LoginDBDemo`](file:///c:/workdir/space-cap/delphi7-notes/examples/11_LoginDBDemo) | **DB 연동 회원 로그인, SQL Injection 방지 파라미터 쿼리 & SQL 스크립트** |
+| **11** | [`11_LoginDBDemo`](file:///c:/workdir/space-cap/delphi7-notes/examples/11_LoginDBDemo) | DB 연동 회원 로그인, SQL Injection 방지 파라미터 쿼리 & INI 설정 |
+| **12** | [`12_DataModuleUserListDemo`](file:///c:/workdir/space-cap/delphi7-notes/examples/12_DataModuleUserListDemo) | **DataModule 전역 DB 커넥션 공유 및 유저 목록(TDBGrid) 조회 실습** |

@@ -18,40 +18,59 @@
    - `LoginForm.ShowModal = mrOk` 결과일 때만 메인 화면(`MainForm`)을 생성하여 실행
    - 로그인 성공 시 사용자 정보(아이디, 이름, 권한)를 메인 화면으로 전달
 
-4. **실시간 DB 대화형 설정 (`PromptDataSource`)**
-   - `[DB 설정]` 버튼 클릭 시 MS OLE DB 데이터 원본 연결 대화상자가 열려 사용자가 직접 DB 커넥션 스트링을 선택 가능
+4. **보안 및 외부 설정 관리 (`dbconfig.ini` & `dbconfig.ini.template`)**
+   - 소스 코드 내 DB 접속 정보(IP, 계정, 비밀번호) 하드코딩 완전 제거
+   - `dbconfig.ini` 파일을 통한 동적 접속 정보 관리 및 Git 커밋 예외 처리
 
 ---
 
 ## 🔑 DB 접속 정보(ConnectionString) 위치 및 설정 방법
 
 ### 1️⃣ 소스 코드 상의 기본 설정 위치
-- 파일: [`LoginForm.pas`](file:///c:/workdir/space-cap/delphi7-notes/examples/11_LoginDBDemo/LoginForm.pas#L58-L62)
-- 위치: `FormCreate` 이벤트 내부
-```delphi
-// 기본 연결 문자열 (Access / MS SQL / ODBC 설정)
-ADOConnection1.LoginPrompt := False;
-ADOConnection1.ConnectionString :=
-  'Provider=Microsoft.Jet.OLEDB.4.0;Data Source=SampleDB.mdb;Persist Security Info=False';
+- 파일: [`LoginForm.pas`](file:///c:/workdir/space-cap/delphi7-notes/examples/11_LoginDBDemo/LoginForm.pas#L74-L95)
+- 위치: `LoadDBConfigFromIni` 이벤트 내부 (`dbconfig.ini` 동적 로딩)
+
+### 2️⃣ 프로그램 실행 중 DB 접속 정보 변경 방법
+- 로그인 화면 오른쪽 아래의 **`[DB 설정]`** 버튼을 클릭하면, 델파이 표준 데이터 원본 설정 창이 나타나 서버 주소, DB 이름, 비밀번호를 직접 선택하고 변경된 접속 정보가 `dbconfig.ini` 파일에 저장됩니다.
+
+---
+
+## 🏗️ 실무 확장 아키텍처: DataModule을 통한 DB 커넥션 재활용
+
+> **Q. 유저 리스트 등 신규 화면을 추가할 때 매번 DB에 새로 접속해야 하나요?**
+>
+> **A. 아니오! 연결(Connection)을 공유해서 재활용하는 것이 정석입니다.**
+
+화면을 열 때마다 DB에 새로 접속(Connect)하면 네트워크 및 서버 오버헤드로 앱이 느려집니다. 실무 델파이 개발에서는 **`TDataModule` (공통 데이터 모듈)** 을 활용하여 DB 커넥션을 애플리케이션 수명 동안 1개만 열어두고 모든 서브 화면에서 재활용합니다.
+
+```text
+[DataModule (DM.pas)] 
+   └── TADOConnection (전역 DB 커넥션 1개 유지)
+          ├── LoginForm (로그인 화면에서 공유)
+          ├── UserListForm (유저 리스트 화면에서 공유)
+          └── OrderForm (수주 관리 화면에서 공유)
 ```
 
-### 2️⃣ 주요 데이터베이스별 커넥션 스트링 예시
+### 💡 실무 구현 코드 예시
 
-- **MS SQL Server (OLEDB)**:
-  ```text
-  Provider=SQLOLEDB.1;Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=MyDatabase;Data Source=localhost
-  ```
-- **MS SQL Server (SQL 사용자 계정 로그인)**:
-  ```text
-  Provider=SQLOLEDB.1;Persist Security Info=True;User ID=sa;Password=myPassword;Initial Catalog=MyDatabase;Data Source=127.0.0.1
-  ```
-- **MS Access (MDB)**:
-  ```text
-  Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\MyPath\SampleDB.mdb;Persist Security Info=False
-  ```
+1. **공통 데이터 모듈 (`DM.pas`)**
+   ```delphi
+   type
+     TDM = class(TDataModule)
+       ADOConnection1: TADOConnection; // 전역 1개 연결 유지
+     end;
+   ```
 
-### 3️⃣ 프로그램 실행 중 DB 접속 정보 변경 방법
-- 로그인 화면 오른쪽 아래의 **`[DB 설정]`** 버튼을 클릭하면, 델파이 표준 데이터 원본 설정 창이 나타나 서버 주소, DB 이름, 비밀번호를 직접 선택하고 연결 테스트를 진행할 수 있습니다.
+2. **유저 리스트 등 신규 화면 (`UserListForm.pas`)**
+   ```delphi
+   procedure TFormUserList.FormShow(Sender: TObject);
+   begin
+     // 공통 DataModule의 커넥션을 그대로 재활용!
+     ADOQuery1.Connection := DM.ADOConnection1;
+     ADOQuery1.SQL.Text := 'SELECT User_ID, User_Name, User_Role FROM USERS';
+     ADOQuery1.Open;
+   end;
+   ```
 
 ---
 

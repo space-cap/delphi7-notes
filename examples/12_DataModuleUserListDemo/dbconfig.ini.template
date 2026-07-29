@@ -1,0 +1,10 @@
+# =========================================================
+# DB 접속 설정 템플릿 (dbconfig.ini.template)
+# =========================================================
+
+[DATABASE]
+Provider=SQLOLEDB.1
+Server=127.0.0.1
+Database=TestDB
+UserID=your_user_id
+Password=your_password
