@@ -44,6 +44,7 @@
 - [x] [05-1. 폼(Form) 생명주기와 주요 이벤트](docs/05-vcl/01-form-lifecycle.md)
 - [x] [05-2. 기본 VCL 컴포넌트 제어 (Button, Edit, Memo 등)](docs/05-vcl/02-basic-components.md)
 - [x] [05-3. 동적 컴포넌트 생성 및 이벤트 연결](docs/05-vcl/03-dynamic-components.md)
+- [x] [05-4. 나만의 커스텀 VCL UI Pack 패키지 제작 가이드](docs/05-vcl/04-custom-component-package-guide.md)
 
 ### 6. 델파이 7 팁 & 환경 설정 (Tips & Setup)
 - [x] [06-1. Windows 10/11 환경에서 Delphi 7 IDE 설정](docs/06-tips/01-win10-setup.md)
@@ -82,4 +83,5 @@
 - [x] **[06_ConfigMakerDemo](examples/06_ConfigMakerDemo/README.md)**: DB 접속 정보를 안전하게 암호화하여 `config.dat` 생성하는 미니 도구 예제
 - [x] **[07_ERPMenuDemo](examples/07_ERPMenuDemo/README.md)**: ERP 대용량 메인 메뉴(`TMainMenu`, `TTreeView`, `TPopupMenu`) 구성 실습 예제
 - [x] **[08_ERPMDIChildDemo](examples/08_ERPMDIChildDemo/README.md)**: 진짜 ERP처럼 메뉴 클릭 시 MDI 자식 창(`FormStyle = fsMDIChild`) 생성 및 관리 실습 예제
-- [x] **[09_TabbedMDIERP](examples/09_TabbedMDIERP/README.md)**: **(신규!)** 모던 ERP - 좌측 네비게이션 사이드바 + 상단 MDI 탭바(`TTabControl`) 동기화 연동 예제
+- [x] **[09_TabbedMDIERP](examples/09_TabbedMDIERP/README.md)**: 모던 ERP - 좌측 네비게이션 사이드바 + 상단 MDI 탭바(`TTabControl`) 동기화 연동 예제
+- [x] **[10_CustomUIPackDemo](examples/10_CustomUIPackDemo/README.md)**: **(신규!)** 이미지 속 알약 형태 보라색 모던 버튼(`+ 신규 수주 등록`) 커스텀 VCL 패키지(`.dpk`) 제작 및 설치 실습 예제

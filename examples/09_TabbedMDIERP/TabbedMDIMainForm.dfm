@@ -1,14 +1,14 @@
 object FormTabbedMDIMain: TFormTabbedMDIMain
-  Left = 180
-  Top = 100
-  Width = 880
-  Height = 620
-  Caption = '모던 ERP - 웹 스타일 접이식 사이드바 + 상단 MDI 탭 시스템'
-  Color = clAppWorkspace
+  Left = 531
+  Top = 136
+  Width = 950
+  Height = 546
+  Caption = #47784#45912' ERP - '#50937' '#49828#53440#51068' '#51217#51060#49885' '#49324#51060#46300#48148' + '#49345#45800' MDI '#53485' '#49884#49828#53596
+  Color = clAppWorkSpace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -12
-  Font.Name = '굴림'
+  Font.Name = #44404#47548
   Font.Style = []
   FormStyle = fsMDIForm
   Menu = MainMenu1
@@ -20,12 +20,12 @@ object FormTabbedMDIMain: TFormTabbedMDIMain
     Left = 210
     Top = 32
     Width = 5
-    Height = 510
+    Height = 435
   end
   object PanelTopTabs: TPanel
     Left = 0
     Top = 0
-    Width = 864
+    Width = 934
     Height = 32
     Align = alTop
     BevelOuter = bvNone
@@ -33,7 +33,7 @@ object FormTabbedMDIMain: TFormTabbedMDIMain
     object TabControlForms: TTabControl
       Left = 0
       Top = 0
-      Width = 864
+      Width = 934
       Height = 32
       Align = alClient
       TabOrder = 0
@@ -44,7 +44,7 @@ object FormTabbedMDIMain: TFormTabbedMDIMain
     Left = 0
     Top = 32
     Width = 210
-    Height = 510
+    Height = 435
     Align = alLeft
     BevelOuter = bvLowered
     Color = clWindow
@@ -56,18 +56,17 @@ object FormTabbedMDIMain: TFormTabbedMDIMain
       Height = 35
       Align = alTop
       BevelOuter = bvNone
-      Color = clBtnFace
       TabOrder = 0
       object LabelSidebarTitle: TLabel
         Left = 10
         Top = 11
-        Width = 114
+        Width = 142
         Height = 12
-        Caption = '[ERP 메뉴 네비게이터]'
+        Caption = '[ERP '#47700#45684' '#45348#48708#44172#51060#53552']'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -12
-        Font.Name = '굴림'
+        Font.Name = #44404#47548
         Font.Style = [fsBold]
         ParentFont = False
       end
@@ -80,7 +79,7 @@ object FormTabbedMDIMain: TFormTabbedMDIMain
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -12
-        Font.Name = '굴림'
+        Font.Name = #44404#47548
         Font.Style = [fsBold]
         ParentFont = False
         TabOrder = 0
@@ -91,7 +90,7 @@ object FormTabbedMDIMain: TFormTabbedMDIMain
       Left = 1
       Top = 36
       Width = 208
-      Height = 473
+      Height = 398
       Align = alClient
       Indent = 19
       ReadOnly = True
@@ -101,59 +100,58 @@ object FormTabbedMDIMain: TFormTabbedMDIMain
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 542
-    Width = 864
+    Top = 467
+    Width = 934
     Height = 20
     Panels = <
       item
-        Text = 'ERP 웹 스타일 접이식 사이드바 시스템 준비 완료'
+        Text = 'ERP '#50937' '#49828#53440#51068' '#51217#51060#49885' '#49324#51060#46300#48148' '#49884#49828#53596' '#51456#48708' '#50756#47308
         Width = 350
       end
       item
-        Text = '열린 탭: 0개'
+        Text = #50676#47536' '#53485': 0'#44060
         Width = 200
       end>
-    SimplePanel = False
   end
   object MainMenu1: TMainMenu
     Left = 240
     Top = 60
     object MenuSystem: TMenuItem
-      Caption = '시스템 관리(&S)'
+      Caption = #49884#49828#53596' '#44288#47532'(&S)'
       object MenuUserList: TMenuItem
-        Caption = '사용자 목록 조회(&U)'
+        Caption = #49324#50857#51088' '#47785#47197' '#51312#54924'(&U)'
         OnClick = MenuUserListClick
       end
       object N1: TMenuItem
         Caption = '-'
       end
       object MenuExit: TMenuItem
-        Caption = '종료(&X)'
+        Caption = #51333#47308'(&X)'
         OnClick = MenuExitClick
       end
     end
     object MenuSales: TMenuItem
-      Caption = '영업 관리(&M)'
+      Caption = #50689#50629' '#44288#47532'(&M)'
       object MenuSalesOrder: TMenuItem
-        Caption = '영업 주문 등록(&O)'
+        Caption = #50689#50629' '#51452#47928' '#46321#47197'(&O)'
         OnClick = MenuSalesOrderClick
       end
     end
     object MenuStock: TMenuItem
-      Caption = '재고 관리(&I)'
+      Caption = #51116#44256' '#44288#47532'(&I)'
       object MenuStockItem: TMenuItem
-        Caption = '품목 재고 현황(&I)'
+        Caption = #54408#47785' '#51116#44256' '#54788#54889'(&I)'
         OnClick = MenuStockItemClick
       end
     end
     object MenuWindow: TMenuItem
-      Caption = '창 관리(&W)'
+      Caption = #52285' '#44288#47532'(&W)'
       object MenuCloseCurrent: TMenuItem
-        Caption = '현재 탭 닫기(&C)'
+        Caption = #54788#51116' '#53485' '#45803#44592'(&C)'
         OnClick = MenuCloseCurrentClick
       end
       object MenuCloseAll: TMenuItem
-        Caption = '모든 탭 닫기(&A)'
+        Caption = #47784#46304' '#53485' '#45803#44592'(&A)'
         OnClick = MenuCloseAllClick
       end
     end
