@@ -39,4 +39,9 @@ Thumbs.db
 
 # IDE & Tool Folders
 .vscode/
+!.vscode/settings.json
 .idea/
+
+# Database & Environment Secrets
+dbconfig.ini
+*.ini.local

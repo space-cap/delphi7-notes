@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, ExtCtrls, DB, ADODB;
+  Dialogs, StdCtrls, ExtCtrls, DB, ADODB, IniFiles;
 
 type
   TFormLogin = class(TForm)
@@ -30,6 +30,9 @@ type
     FLoggedInUserID: string;
     FLoggedInUserName: string;
     FLoggedInUserRole: string;
+    FIniFilePath: string;
+    procedure LoadDBConfigFromIni;
+    procedure SaveDBConfigToIni(const AConnStr: string);
     function ConnectToDatabase: Boolean;
     function AuthenticateUser(const AUserID, AUserPW: string): Boolean;
   public
@@ -47,29 +50,73 @@ implementation
 
 procedure TFormLogin.FormCreate(Sender: TObject);
 begin
-  Caption := 'ì‹œìŠ¤í…œ ë¡œê·¸ì¸';
+  Caption := '½Ã½ºÅÛ ·Î±×ÀÎ';
   Position := poScreenCenter;
   BorderStyle := bsSingle;
   BorderIcons := [biSystemMenu, biMinimize];
 
-  // ë¹„ë°€ë²ˆí˜¸ ì…ë ¥ë€ ë§ˆìŠ¤í‚¹ ì²˜ë¦¬
+  // ºñ¹Ğ¹øÈ£ ÀÔ·Â¶õ ¸¶½ºÅ· Ã³¸®
   EditUserPW.PasswordChar := '*';
-  LabelStatus.Caption := 'ì•„ì´ë””ì™€ ë¹„ë°€ë²ˆí˜¸ë¥¼ ì…ë ¥í•˜ê³  ë¡œê·¸ì¸í•˜ì„¸ìš”.';
+  LabelStatus.Caption := '¾ÆÀÌµğ¿Í ºñ¹Ğ¹øÈ£¸¦ ÀÔ·ÂÇÏ°í ·Î±×ÀÎÇÏ¼¼¿ä.';
   LabelStatus.Font.Color := clGray;
 
-  // ê¸°ë³¸ í…ŒìŠ¤íŠ¸ ê³„ì • ì…‹íŒ…
+  // ±âº» Å×½ºÆ® °èÁ¤ ¼ÂÆÃ
   EditUserID.Text := 'admin';
   EditUserPW.Text := 'admin123!';
 
-  // ê¸°ë³¸ ADO ì»¤ë„¥ì…˜ ìŠ¤íŠ¸ë§ ì„¤ì • (MS SQL Server ê¸°ì¤€: SQLOLEDB)
-  // ì ‘ì† í™˜ê²½(ì„œë²„ ì£¼ì†Œ, DBëª…, sa ë¹„ë°€ë²ˆí˜¸)ì— ë§ê²Œ ìˆ˜ì •í•˜ì—¬ ì‚¬ìš©í•˜ì„¸ìš”.
+  // ½ÇÇà ÆÄÀÏ À§Ä¡ÀÇ dbconfig.ini °æ·Î ¼³Á¤
+  FIniFilePath := ExtractFilePath(Application.ExeName) + 'dbconfig.ini';
+
+  // ¼Ò½º ÄÚµå ³» ÇÏµåÄÚµù Á¦°Å! ¿ÜºÎ INI ÆÄÀÏ¿¡¼­ DB Á¢¼Ó Á¤º¸ µ¿Àû ·Îµù
+  LoadDBConfigFromIni;
+end;
+
+procedure TFormLogin.LoadDBConfigFromIni;
+var
+  Ini: TIniFile;
+  TemplatePath, Provider, Server, Database, UserID, Password, ConnStr: string;
+begin
   ADOConnection1.LoginPrompt := False;
-  ADOConnection1.ConnectionString :=
-    'Provider=SQLOLEDB.1;' +
-    'Data Source=127.0.0.1;' +
-    'Initial Catalog=TestDB;' +
-    'User ID=sa;' +
-    'Password=admin123!';
+
+  // dbconfig.ini°¡ ¾ø´Â °æ¿ì template ÆÄÀÏÀÌ ÀÖÀ¸¸é ±âº» ÅÛÇÃ¸´ »ı¼º
+  if not FileExists(FIniFilePath) then
+  begin
+    TemplatePath := ExtractFilePath(Application.ExeName) + 'dbconfig.ini.template';
+    if FileExists(TemplatePath) then
+      CopyFile(PChar(TemplatePath), PChar(FIniFilePath), True);
+  end;
+
+  if FileExists(FIniFilePath) then
+  begin
+    Ini := TIniFile.Create(FIniFilePath);
+    try
+      Provider := Ini.ReadString('DATABASE', 'Provider', 'SQLOLEDB.1');
+      Server   := Ini.ReadString('DATABASE', 'Server', '127.0.0.1');
+      Database := Ini.ReadString('DATABASE', 'Database', 'TestDB');
+      UserID   := Ini.ReadString('DATABASE', 'UserID', '');
+      Password := Ini.ReadString('DATABASE', 'Password', '');
+
+      ConnStr := Format('Provider=%s;Data Source=%s;Initial Catalog=%s;User ID=%s;Password=%s;',
+        [Provider, Server, Database, UserID, Password]);
+
+      ADOConnection1.ConnectionString := ConnStr;
+    finally
+      Ini.Free;
+    end;
+  end;
+end;
+
+procedure TFormLogin.SaveDBConfigToIni(const AConnStr: string);
+var
+  Ini: TIniFile;
+begin
+  // Ä¿³Ø¼Ç ½ºÆ®¸µ ¼³Á¤ º¯°æ ½Ã INI ÆÄÀÏ¿¡ ±â·Ï
+  Ini := TIniFile.Create(FIniFilePath);
+  try
+    Ini.WriteString('DATABASE', 'ConnectionString', AConnStr);
+  finally
+    Ini.Free;
+  end;
 end;
 
 function TFormLogin.ConnectToDatabase: Boolean;
@@ -80,7 +127,7 @@ begin
     begin
       if Trim(ADOConnection1.ConnectionString) = '' then
       begin
-        ShowMessage('DB ì—°ê²° ë¬¸ìì—´ì´ ì„¤ì •ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤. [DB ì ‘ì† ì„¤ì •]ì„ í™•ì¸í•˜ì„¸ìš”.');
+        ShowMessage('DB ¿¬°á ¼³Á¤ÀÌ ¾ø½À´Ï´Ù. [DB ¼³Á¤] ¹öÆ°À¸·Î dbconfig.ini ¹× Á¢¼Ó Á¤º¸¸¦ ¼³Á¤ÇÏ¼¼¿ä.');
         Exit;
       end;
       ADOConnection1.Connected := True;
@@ -89,9 +136,10 @@ begin
   except
     on E: Exception do
     begin
-      LabelStatus.Caption := 'DB ì ‘ì† ì‹¤íŒ¨: ' + E.Message;
+      LabelStatus.Caption := 'DB Á¢¼Ó ½ÇÆĞ: ' + E.Message;
       LabelStatus.Font.Color := clRed;
-      MessageDlg('ë°ì´í„°ë² ì´ìŠ¤ ì ‘ì† ì¤‘ ì˜¤ë¥˜ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤:' + #13#10 + E.Message,
+      MessageDlg('µ¥ÀÌÅÍº£ÀÌ½º Á¢¼Ó Áß ¿À·ù°¡ ¹ß»ıÇß½À´Ï´Ù:' + #13#10 +
+        'dbconfig.ini ÆÄÀÏ ¼³Á¤ ¹× ³×Æ®¿öÅ© »óÅÂ¸¦ È®ÀÎÇÏ¼¼¿ä.' + #13#10 + #13#10 + E.Message,
         mtError, [mbOK], 0);
     end;
   end;
@@ -108,12 +156,12 @@ begin
     ADOQuery1.Connection := ADOConnection1;
     ADOQuery1.SQL.Clear;
 
-    // íŒŒë¼ë¯¸í„°í™” ì¿¼ë¦¬ ì‚¬ìš© (SQL Injection ì˜ˆë°© í•„ìˆ˜!)
+    // ÆÄ¶ó¹ÌÅÍÈ­ Äõ¸® »ç¿ë (SQL Injection ¿¹¹æ ÇÊ¼ö!)
     ADOQuery1.SQL.Add('SELECT User_ID, User_Name, User_Role, Is_Active');
     ADOQuery1.SQL.Add('FROM USERS');
     ADOQuery1.SQL.Add('WHERE User_ID = :UserID AND Password = :Password');
 
-    // íŒŒë¼ë¯¸í„° ê°’ ë°”ì¸ë”©
+    // ÆÄ¶ó¹ÌÅÍ °ª ¹ÙÀÎµù
     ADOQuery1.Parameters.ParamByName('UserID').Value := AUserID;
     ADOQuery1.Parameters.ParamByName('Password').Value := AUserPW;
 
@@ -121,38 +169,38 @@ begin
 
     if ADOQuery1.IsEmpty then
     begin
-      LabelStatus.Caption := 'ì•„ì´ë”” ë˜ëŠ” ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.';
+      LabelStatus.Caption := '¾ÆÀÌµğ ¶Ç´Â ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.';
       LabelStatus.Font.Color := clRed;
-      MessageDlg('ë¡œê·¸ì¸ ì‹¤íŒ¨: ì•„ì´ë”” ë˜ëŠ” ë¹„ë°€ë²ˆí˜¸ë¥¼ í™•ì¸í•˜ì„¸ìš”.', mtWarning, [mbOK], 0);
+      MessageDlg('·Î±×ÀÎ ½ÇÆĞ: ¾ÆÀÌµğ ¶Ç´Â ºñ¹Ğ¹øÈ£¸¦ È®ÀÎÇÏ¼¼¿ä.', mtWarning, [mbOK], 0);
       EditUserPW.SetFocus;
       EditUserPW.SelectAll;
     end
     else
     begin
-      // ê³„ì • í™œì„±í™” ìƒíƒœ ì²´í¬
+      // °èÁ¤ È°¼ºÈ­ »óÅÂ Ã¼Å©
       if ADOQuery1.FieldByName('Is_Active').AsString <> 'Y' then
       begin
-        LabelStatus.Caption := 'ë¹„í™œì„±í™”ëœ ê³„ì •ì…ë‹ˆë‹¤. ê´€ë¦¬ìì—ê²Œ ë¬¸ì˜í•˜ì„¸ìš”.';
+        LabelStatus.Caption := 'ºñÈ°¼ºÈ­µÈ °èÁ¤ÀÔ´Ï´Ù. °ü¸®ÀÚ¿¡°Ô ¹®ÀÇÇÏ¼¼¿ä.';
         LabelStatus.Font.Color := clRed;
-        MessageDlg('í•´ë‹¹ ê³„ì •ì€ ì‚¬ìš©ì´ ì •ì§€ë˜ì—ˆìŠµë‹ˆë‹¤.', mtError, [mbOK], 0);
+        MessageDlg('ÇØ´ç °èÁ¤Àº »ç¿ëÀÌ Á¤ÁöµÇ¾ú½À´Ï´Ù.', mtError, [mbOK], 0);
         Exit;
       end;
 
-      // ë¡œê·¸ì¸ ì‚¬ìš©ì ì •ë³´ ì €ì¥
+      // ·Î±×ÀÎ »ç¿ëÀÚ Á¤º¸ ÀúÀå
       FLoggedInUserID := ADOQuery1.FieldByName('User_ID').AsString;
       FLoggedInUserName := ADOQuery1.FieldByName('User_Name').AsString;
       FLoggedInUserRole := ADOQuery1.FieldByName('User_Role').AsString;
 
-      LabelStatus.Caption := 'ë¡œê·¸ì¸ ì„±ê³µ!';
+      LabelStatus.Caption := '·Î±×ÀÎ ¼º°ø!';
       LabelStatus.Font.Color := clGreen;
       Result := True;
     end;
   except
     on E: Exception do
     begin
-      LabelStatus.Caption := 'ë¡œê·¸ì¸ ì²˜ë¦¬ ì¤‘ DB ì˜¤ë¥˜ ë°œìƒ';
+      LabelStatus.Caption := '·Î±×ÀÎ Ã³¸® Áß DB ¿À·ù ¹ß»ı';
       LabelStatus.Font.Color := clRed;
-      MessageDlg('ë¡œê·¸ì¸ ì¡°íšŒ ì¤‘ ì˜¤ë¥˜ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤:' + #13#10 + E.Message, mtError, [mbOK], 0);
+      MessageDlg('·Î±×ÀÎ Á¶È¸ Áß ¿À·ù°¡ ¹ß»ıÇß½À´Ï´Ù:' + #13#10 + E.Message, mtError, [mbOK], 0);
     end;
   end;
 end;
@@ -166,22 +214,22 @@ begin
 
   if UserID = '' then
   begin
-    ShowMessage('ì•„ì´ë””ë¥¼ ì…ë ¥í•´ ì£¼ì„¸ìš”.');
+    ShowMessage('¾ÆÀÌµğ¸¦ ÀÔ·ÂÇØ ÁÖ¼¼¿ä.');
     EditUserID.SetFocus;
     Exit;
   end;
 
   if UserPW = '' then
   begin
-    ShowMessage('ë¹„ë°€ë²ˆí˜¸ë¥¼ ì…ë ¥í•´ ì£¼ì„¸ìš”.');
+    ShowMessage('ºñ¹Ğ¹øÈ£¸¦ ÀÔ·ÂÇØ ÁÖ¼¼¿ä.');
     EditUserPW.SetFocus;
     Exit;
   end;
 
-  // DB ì•„ì´ë””, ë¹„ë²ˆ ê²€ì¦
+  // DB ¾ÆÀÌµğ, ºñ¹ø °ËÁõ
   if AuthenticateUser(UserID, UserPW) then
   begin
-    ModalResult := mrOk; // ëª¨ë‹¬ ê²°ê³¼ OK ë°˜í™˜í•˜ì—¬ ë©”ì¸ í™”ë©´ìœ¼ë¡œ ì´ë™
+    ModalResult := mrOk; // ¸ğ´Ş °á°ú OK ¹İÈ¯ÇÏ¿© ¸ŞÀÎ È­¸éÀ¸·Î ÀÌµ¿
   end;
 end;
 
@@ -201,7 +249,8 @@ begin
     if ADOConnection1.Connected then
       ADOConnection1.Close;
     ADOConnection1.ConnectionString := NewConnStr;
-    ShowMessage('DB ì—°ê²° ë¬¸ìì—´ì´ ì„¤ì •ë˜ì—ˆìŠµë‹ˆë‹¤.' + #13#10 + NewConnStr);
+    SaveDBConfigToIni(NewConnStr);
+    ShowMessage('DB ¿¬°á Á¤º¸°¡ ¼º°øÀûÀ¸·Î º¯°æµÇ¾î dbconfig.ini¿¡ ÀúÀåµÇ¾ú½À´Ï´Ù.');
   end;
 end;
 
