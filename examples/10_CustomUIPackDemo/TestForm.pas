@@ -13,8 +13,8 @@ type
     MemoLog: TMemo;
     ModernButton1: TModernButton;
     procedure FormCreate(Sender: TObject);
-  private
     procedure BtnNewOrderClick(Sender: TObject);
+  private
   public
     { Public declarations }
   end;

@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Dialogs, Types;
 
 type
-  // 보라색 모서리가 둥근 모던 버튼 컴포넌트
+  // 둥근 모서리와 호버링 효과를 가진 모던 버튼 컴포넌트
   TModernButton = class(TCustomControl)
   private
     FBGColor: TColor;
@@ -26,13 +26,13 @@ type
   public
     constructor Create(AOwner: TComponent); override;
   published
-    property BGColor: TColor read FBGColor write SetBGColor default $00E14B5C; // 보라색
-    property HoverColor: TColor read FHoverColor write SetHoverColor default $00F06675; // 호버 시 밝은 보라
+    property BGColor: TColor read FBGColor write SetBGColor default $00E14B5C;
+    property HoverColor: TColor read FHoverColor write SetHoverColor default $00F06675;
     property TextColor: TColor read FTextColor write SetTextColor default clWhite;
     property CornerRadius: Integer read FCornerRadius write SetCornerRadius default 22;
     property Caption;
     property Font;
-    property ParentFont; // DFM 읽기 에러 방지용 ParentFont 프로퍼티 노출!
+    property ParentFont; // DFM 읽기 시 ParentFont 프로퍼티 지원
     property Enabled;
     property Visible;
     property OnClick;
@@ -50,10 +50,10 @@ end;
 constructor TModernButton.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
-  FBGColor := $00E14B5C;     // 보라색
-  FHoverColor := $00F06675;  // 밝은 보라색
+  FBGColor := $00E14B5C;     // 기본 배경색
+  FHoverColor := $00F06675;  // 마우스 호버 색상
   FTextColor := clWhite;
-  FCornerRadius := 22;       // 동글동글 모서리
+  FCornerRadius := 22;       // 둥근 모서리 반지름
   FIsMouseHover := False;
   Width := 160;
   Height := 40;
@@ -146,5 +146,8 @@ begin
   R := ClientRect;
   DrawText(Canvas.Handle, PChar(Caption), -1, R, DT_SINGLELINE or DT_CENTER or DT_VCENTER);
 end;
+
+initialization
+  RegisterClass(TModernButton);
 
 end.
