@@ -1,27 +1,27 @@
-# 15. DevExpress TcxGrid ¼öÁÖ ¸¶½ºÅÍ-µğÅ×ÀÏ (Master-Detail) & ±â°£ °Ë»ö µ¥¸ğ
+# 15. DevExpress TcxGrid ìˆ˜ì£¼ ë§ˆìŠ¤í„°-ë””í…Œì¼ (Master-Detail) & ê¸°ê°„ ê²€ìƒ‰ ë°ëª¨
 
-ÀÌ ¿¹Á¦´Â ±â¾÷Çü C/S ½Ç¹«¿¡¼­ °¡Àå ¸¹ÀÌ »ç¿ëÇÏ´Â **[±â°£ °Ë»ö + TOP 1000 Á¦ÇÑ]** Á¶°Ç °Ë»ö ÆĞÅÏ°ú **[DevExpress QuantumGrid Master-Detail (°èÃş±¸Á¶ ±×¸®µå)]** ±â´ÉÀ» ¿¬µ¿ÇÑ ½ÇÀü ÀÀ¿ë ÇÁ·ÎÁ§Æ®ÀÔ´Ï´Ù.
-
----
-
-## 1. ½Ç¹« ºñ(Şª)ÆäÀÌÂ¡ ¼³°è ¿øÄ¢
-
-1. **¿Ö ÆäÀÌÂ¡À» ¾²Áö ¾Ê³ª¿ä?**
-   - ERP/MES ½Ç¹« »ç¿ëÀÚ´Â ¼ö¹é °ÇÀÇ ÁÖ¹®¼­ ¹× ÀüÇ¥ µ¥ÀÌÅÍ¸¦ ±×¸®µå¿¡¼­ **Á÷Á¢ ºÎ¼­º°/°Å·¡Ã³º°·Î ±×·ìÇÎ**ÇÏ°í **¼Ò°è/ÇÕ°è(Footer Summary)¸¦ °ËÁõ**ÇÑ ÈÄ **¿¢¼¿·Î ³»º¸³»´Â ÀÛ¾÷**À» ¼öÇàÇÕ´Ï´Ù. ÆäÀÌÂ¡ÀÌ µé¾î°¡¸é 10°Ç¾¿¸¸ °è»êµÇ¹Ç·Î ÀÌ ÀÛ¾÷À» ¼öÇàÇÒ ¼ö ¾ø½À´Ï´Ù.
-
-2. **¾ÈÀü ÀåÄ¡ (TOP 1000 + Date Range)**:
-   - µ¥ÀÌÅÍ °úºÎÇÏ·Î ÀÎÇÑ DB/Å¬¶óÀÌ¾ğÆ® ´Ù¿î(Freeze)À» ¸·±â À§ÇØ **±âº» Á¶È¸ ±â°£(½ÃÀÛÀÏ~Á¾·áÀÏ)** ¹× **`SELECT TOP 1000` »óÀ§ ÀÎÃâ Á¦ÇÑ**À» µÓ´Ï´Ù.
+ì´ ì˜ˆì œëŠ” ê¸°ì—…í˜• C/S ì‹¤ë¬´ì—ì„œ ê°€ì¥ ë§ì´ ì‚¬ìš©í•˜ëŠ” **[ê¸°ê°„ ê²€ìƒ‰ + TOP 1000 ì œí•œ]** ì¡°ê±´ ê²€ìƒ‰ íŒ¨í„´ê³¼ **[DevExpress QuantumGrid Master-Detail (ê³„ì¸µêµ¬ì¡° ê·¸ë¦¬ë“œ)]** ê¸°ëŠ¥ì„ ì—°ë™í•œ ì‹¤ì „ ì‘ìš© í”„ë¡œì íŠ¸ì…ë‹ˆë‹¤.
 
 ---
 
-## 2. DB ½ºÅ©¸³Æ® ½ÇÇà (`schema.sql`)
+## 1. ì‹¤ë¬´ ë¹„(é)í˜ì´ì§• ì„¤ê³„ ì›ì¹™
 
-SSMS¿¡¼­ [`schema.sql`](file:///h:/lee/delphi7-notes/examples/15_DevExpressMSSQLOrderMasterDetailDemo/schema.sql) ½ºÅ©¸³Æ®¸¦ ½ÇÇàÇÏ¿© `ORDERDB` µ¥ÀÌÅÍº£ÀÌ½º, `TB_ORDER_MASTER` (ÁÖ¹® Çì´õ), `TB_ORDER_DETAIL` (ÁÖ¹® Ç°¸ñ) Å×ÀÌºí ¹× »ùÇÃ µ¥ÀÌÅÍ 50°Ç/Ç°¸ñ 150°ÇÀ» »ı¼ºÇÕ´Ï´Ù.
+1. **ì™œ í˜ì´ì§•ì„ ì“°ì§€ ì•Šë‚˜ìš”?**
+   - ERP/MES ì‹¤ë¬´ ì‚¬ìš©ìëŠ” ìˆ˜ë°± ê±´ì˜ ì£¼ë¬¸ì„œ ë° ì „í‘œ ë°ì´í„°ë¥¼ ê·¸ë¦¬ë“œì—ì„œ **ì§ì ‘ ë¶€ì„œë³„/ê±°ë˜ì²˜ë³„ë¡œ ê·¸ë£¹í•‘**í•˜ê³  **ì†Œê³„/í•©ê³„(Footer Summary)ë¥¼ ê²€ì¦**í•œ í›„ **ì—‘ì…€ë¡œ ë‚´ë³´ë‚´ëŠ” ì‘ì—…**ì„ ìˆ˜í–‰í•©ë‹ˆë‹¤. í˜ì´ì§•ì´ ë“¤ì–´ê°€ë©´ 10ê±´ì”©ë§Œ ê³„ì‚°ë˜ë¯€ë¡œ ì´ ì‘ì—…ì„ ìˆ˜í–‰í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.
+
+2. **ì•ˆì „ ì¥ì¹˜ (TOP 1000 + Date Range)**:
+   - ë°ì´í„° ê³¼ë¶€í•˜ë¡œ ì¸í•œ DB/í´ë¼ì´ì–¸íŠ¸ ë‹¤ìš´(Freeze)ì„ ë§‰ê¸° ìœ„í•´ **ê¸°ë³¸ ì¡°íšŒ ê¸°ê°„(ì‹œì‘ì¼~ì¢…ë£Œì¼)** ë° **`SELECT TOP 1000` ìƒìœ„ ì¸ì¶œ ì œí•œ**ì„ ë‘¡ë‹ˆë‹¤.
 
 ---
 
-## 3. ÆÄÀÏ ±¸¼º
-* [`schema.sql`](file:///h:/lee/delphi7-notes/examples/15_DevExpressMSSQLOrderMasterDetailDemo/schema.sql): MS SQL Server DB/Å×ÀÌºí »ı¼º ¹× »ùÇÃ µ¥ÀÌÅÍ
-* [`dbconfig.ini.template`](file:///h:/lee/delphi7-notes/examples/15_DevExpressMSSQLOrderMasterDetailDemo/dbconfig.ini.template): DB Á¢¼Ó µ¿Àû ¼³Á¤ ÅÛÇÃ¸´ (`Database=ORDERDB`)
-* [`DevExpressMSSQLOrderMasterDetailDemo.dpr`](file:///h:/lee/delphi7-notes/examples/15_DevExpressMSSQLOrderMasterDetailDemo/DevExpressMSSQLOrderMasterDetailDemo.dpr): µ¨ÆÄÀÌ ¸ŞÀÎ ÇÁ·ÎÁ§Æ® ÆÄÀÏ
-* [`MainForm.pas`](file:///h:/lee/delphi7-notes/examples/15_DevExpressMSSQLOrderMasterDetailDemo/MainForm.pas) / [`MainForm.dfm`](file:///h:/lee/delphi7-notes/examples/15_DevExpressMSSQLOrderMasterDetailDemo/MainForm.dfm): ¸¶½ºÅÍ-µğÅ×ÀÏ ±×¸®µå & ±â°£ °Ë»ö ¸ŞÀÎ Æû
+## 2. DB ìŠ¤í¬ë¦½íŠ¸ ì‹¤í–‰ (`schema.sql`)
+
+SSMSì—ì„œ í†µí•© ë§ˆìŠ¤í„° ìŠ¤í¬ë¦½íŠ¸ [`examples/schema_master_delphi7.sql`](file:///h:/lee/delphi7-notes/examples/schema_master_delphi7.sql) ë˜ëŠ” [`schema.sql`](file:///h:/lee/delphi7-notes/examples/15_DevExpressMSSQLOrderMasterDetailDemo/schema.sql)ì„ ì‹¤í–‰í•˜ì—¬ `DELPHI7_DB` ë°ì´í„°ë² ì´ìŠ¤ì— í…Œì´ë¸” ë° ìƒ˜í”Œ ìˆ˜ì£¼ ë°ì´í„°ë¥¼ ìƒì„±í•©ë‹ˆë‹¤.
+
+---
+
+## 3. íŒŒì¼ êµ¬ì„±
+* [`schema.sql`](file:///h:/lee/delphi7-notes/examples/15_DevExpressMSSQLOrderMasterDetailDemo/schema.sql): MS SQL Server DB/í…Œì´ë¸” ìƒì„± ë° ìƒ˜í”Œ ë°ì´í„°
+* [`dbconfig.ini.template`](file:///h:/lee/delphi7-notes/examples/15_DevExpressMSSQLOrderMasterDetailDemo/dbconfig.ini.template): DB ì ‘ì† ë™ì  ì„¤ì • í…œí”Œë¦¿ (`Database=DELPHI7_DB`)
+* [`DevExpressMSSQLOrderMasterDetailDemo.dpr`](file:///h:/lee/delphi7-notes/examples/15_DevExpressMSSQLOrderMasterDetailDemo/DevExpressMSSQLOrderMasterDetailDemo.dpr): ë¸íŒŒì´ ë©”ì¸ í”„ë¡œì íŠ¸ íŒŒì¼
+* [`MainForm.pas`](file:///h:/lee/delphi7-notes/examples/15_DevExpressMSSQLOrderMasterDetailDemo/MainForm.pas) / [`MainForm.dfm`](file:///h:/lee/delphi7-notes/examples/15_DevExpressMSSQLOrderMasterDetailDemo/MainForm.dfm): ë§ˆìŠ¤í„°-ë””í…Œì¼ ê·¸ë¦¬ë“œ & ê¸°ê°„ ê²€ìƒ‰ ë©”ì¸ í¼

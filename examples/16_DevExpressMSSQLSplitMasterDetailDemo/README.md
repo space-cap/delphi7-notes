@@ -1,28 +1,28 @@
-# 16. DevExpress TcxGrid »óÇÏ ºĞÇÒ (Split-Panel) ¸¶½ºÅÍ-µğÅ×ÀÏ µ¥¸ğ
+# 16. DevExpress TcxGrid ìƒí•˜ ë¶„í•  (Split-Panel) ë§ˆìŠ¤í„°-ë””í…Œì¼ ë°ëª¨
 
-ÀÌ ¿¹Á¦´Â ±â¾÷Çü C/S ÀÔ·Â ¹× ¿¬µ¿ ¾÷¹«¿¡¼­ °¡Àå ¸¹ÀÌ »ç¿ëÇÏ´Â **[»óÇÏ ºĞÇÒ ÆĞ³Î(TSplitter)]** ·¹ÀÌ¾Æ¿ô°ú **[Master-Detail ½Ç½Ã°£ Äõ¸® ¿¬µ¿]** ÆĞÅÏÀ» ½Ç½ÀÇÏ´Â ÇÁ·ÎÁ§Æ®ÀÔ´Ï´Ù.
-
----
-
-## 1. ½Ç¹« ºĞÇÒ ±×¸®µå ¿¬µ¿ ¿øÄ¢
-
-1. **`TSplitter` ºĞÇÒ ·¹ÀÌ¾Æ¿ô**:
-   - »ó´Ü ÆĞ³Î(`pnlMaster`)°ú ÇÏ´Ü ÆĞ³Î(`pnlDetail`) »çÀÌ¿¡ `TSplitter` ÄÄÆ÷³ÍÆ®¸¦ ¹èÄ¡ÇÏ¿© »ç¿ëÀÚ°¡ ¸¶¿ì½º µå·¡±×·Î ±×¸®µå ³ôÀÌ¸¦ ÀÚÀ¯·Ó°Ô Á¶ÀıÇÒ ¼ö ÀÖ½À´Ï´Ù.
-
-2. **`DataSet.AfterScroll` ½Ç½Ã°£ µ¥ÀÌÅÍ ¼ö½Å**:
-   - »ó´Ü ¸¶½ºÅÍ ±×¸®µå(`tvSalesMaster`)¿¡¼­ ¸¶¿ì½º Å¬¸¯ÀÌ³ª Å°º¸µå È­»ìÇ¥(Up, Down)·Î ÇàÀ» ÀÌµ¿ÇÒ ¶§¸¶´Ù `qryMasterAfterScroll` ÀÌº¥Æ®°¡ Æ®¸®°ÅµË´Ï´Ù.
-   - ÇöÀç ¼±ÅÃµÈ ÀüÇ¥ PK(`SalesID`)¸¦ ÆÄ¶ó¹ÌÅÍ·Î ÇÏ¿© ÇÏ´Ü `qryDetail`À» Áï½Ã ÀçÁ¶È¸(Open)ÇÕ´Ï´Ù.
+ì´ ì˜ˆì œëŠ” ê¸°ì—…í˜• C/S ì…ë ¥ ë° ì—°ë™ ì—…ë¬´ì—ì„œ ê°€ì¥ ë§ì´ ì‚¬ìš©í•˜ëŠ” **[ìƒí•˜ ë¶„í•  íŒ¨ë„(TSplitter)]** ë ˆì´ì•„ì›ƒê³¼ **[Master-Detail ì‹¤ì‹œê°„ ì¿¼ë¦¬ ì—°ë™]** íŒ¨í„´ì„ ì‹¤ìŠµí•˜ëŠ” í”„ë¡œì íŠ¸ì…ë‹ˆë‹¤.
 
 ---
 
-## 2. DB ½ºÅ©¸³Æ® ½ÇÇà (`schema.sql`)
+## 1. ì‹¤ë¬´ ë¶„í•  ê·¸ë¦¬ë“œ ì—°ë™ ì›ì¹™
 
-SSMS¿¡¼­ [`schema.sql`](file:///h:/lee/delphi7-notes/examples/16_DevExpressMSSQLSplitMasterDetailDemo/schema.sql) ½ºÅ©¸³Æ®¸¦ ½ÇÇàÇÏ¿© `SALESDB` µ¥ÀÌÅÍº£ÀÌ½º, `TB_SALES_MASTER` (¸ÅÃâ ÀüÇ¥), `TB_SALES_DETAIL` (Ç°¸ñ ¼¼ºÎ³»¿ª) Å×ÀÌºí ¹× »ùÇÃ µ¥ÀÌÅÍ 40°Ç/Ç°¸ñ 120°ÇÀ» »ı¼ºÇÕ´Ï´Ù.
+1. **`TSplitter` ë¶„í•  ë ˆì´ì•„ì›ƒ**:
+   - ìƒë‹¨ íŒ¨ë„(`pnlMaster`)ê³¼ í•˜ë‹¨ íŒ¨ë„(`pnlDetail`) ì‚¬ì´ì— `TSplitter` ì»´í¬ë„ŒíŠ¸ë¥¼ ë°°ì¹˜í•˜ì—¬ ì‚¬ìš©ìê°€ ë§ˆìš°ìŠ¤ ë“œë˜ê·¸ë¡œ ê·¸ë¦¬ë“œ ë†’ì´ë¥¼ ììœ ë¡­ê²Œ ì¡°ì ˆí•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.
+
+2. **`DataSet.AfterScroll` ì‹¤ì‹œê°„ ë°ì´í„° ìˆ˜ì‹ **:
+   - ìƒë‹¨ ë§ˆìŠ¤í„° ê·¸ë¦¬ë“œ(`tvSalesMaster`)ì—ì„œ ë§ˆìš°ìŠ¤ í´ë¦­ì´ë‚˜ í‚¤ë³´ë“œ í™”ì‚´í‘œ(Up, Down)ë¡œ í–‰ì„ ì´ë™í•  ë•Œë§ˆë‹¤ `qryMasterAfterScroll` ì´ë²¤íŠ¸ê°€ íŠ¸ë¦¬ê±°ë©ë‹ˆë‹¤.
+   - í˜„ì¬ ì„ íƒëœ ì „í‘œ PK(`SalesID`)ë¥¼ íŒŒë¼ë¯¸í„°ë¡œ í•˜ì—¬ í•˜ë‹¨ `qryDetail`ì„ ì¦‰ì‹œ ì¬ì¡°íšŒ(Open)í•©ë‹ˆë‹¤.
 
 ---
 
-## 3. ÆÄÀÏ ±¸¼º
-* [`schema.sql`](file:///h:/lee/delphi7-notes/examples/16_DevExpressMSSQLSplitMasterDetailDemo/schema.sql): MS SQL Server DB/Å×ÀÌºí »ı¼º ¹× »ùÇÃ µ¥ÀÌÅÍ
-* [`dbconfig.ini.template`](file:///h:/lee/delphi7-notes/examples/16_DevExpressMSSQLSplitMasterDetailDemo/dbconfig.ini.template): DB Á¢¼Ó µ¿Àû ¼³Á¤ ÅÛÇÃ¸´ (`Database=SALESDB`)
-* [`DevExpressMSSQLSplitMasterDetailDemo.dpr`](file:///h:/lee/delphi7-notes/examples/16_DevExpressMSSQLSplitMasterDetailDemo/DevExpressMSSQLSplitMasterDetailDemo.dpr): µ¨ÆÄÀÌ ¸ŞÀÎ ÇÁ·ÎÁ§Æ® ÆÄÀÏ
-* [`MainForm.pas`](file:///h:/lee/delphi7-notes/examples/16_DevExpressMSSQLSplitMasterDetailDemo/MainForm.pas) / [`MainForm.dfm`](file:///h:/lee/delphi7-notes/examples/16_DevExpressMSSQLSplitMasterDetailDemo/MainForm.dfm): »óÇÏ ºĞÇÒ ¸¶½ºÅÍ-µğÅ×ÀÏ ¸ŞÀÎ Æû
+## 2. DB ìŠ¤í¬ë¦½íŠ¸ ì‹¤í–‰ (`schema.sql`)
+
+SSMSì—ì„œ í†µí•© ë§ˆìŠ¤í„° ìŠ¤í¬ë¦½íŠ¸ [`examples/schema_master_delphi7.sql`](file:///h:/lee/delphi7-notes/examples/schema_master_delphi7.sql) ë˜ëŠ” [`schema.sql`](file:///h:/lee/delphi7-notes/examples/16_DevExpressMSSQLSplitMasterDetailDemo/schema.sql)ì„ ì‹¤í–‰í•˜ì—¬ `DELPHI7_DB` ë°ì´í„°ë² ì´ìŠ¤ì— í…Œì´ë¸” ë° ìƒ˜í”Œ ë§¤ì¶œ ì „í‘œ ë°ì´í„°ë¥¼ ìƒì„±í•©ë‹ˆë‹¤.
+
+---
+
+## 3. íŒŒì¼ êµ¬ì„±
+* [`schema.sql`](file:///h:/lee/delphi7-notes/examples/16_DevExpressMSSQLSplitMasterDetailDemo/schema.sql): MS SQL Server DB/í…Œì´ë¸” ìƒì„± ë° ìƒ˜í”Œ ë°ì´í„°
+* [`dbconfig.ini.template`](file:///h:/lee/delphi7-notes/examples/16_DevExpressMSSQLSplitMasterDetailDemo/dbconfig.ini.template): DB ì ‘ì† ë™ì  ì„¤ì • í…œí”Œë¦¿ (`Database=DELPHI7_DB`)
+* [`DevExpressMSSQLSplitMasterDetailDemo.dpr`](file:///h:/lee/delphi7-notes/examples/16_DevExpressMSSQLSplitMasterDetailDemo/DevExpressMSSQLSplitMasterDetailDemo.dpr): ë¸íŒŒì´ ë©”ì¸ í”„ë¡œì íŠ¸ íŒŒì¼
+* [`MainForm.pas`](file:///h:/lee/delphi7-notes/examples/16_DevExpressMSSQLSplitMasterDetailDemo/MainForm.pas) / [`MainForm.dfm`](file:///h:/lee/delphi7-notes/examples/16_DevExpressMSSQLSplitMasterDetailDemo/MainForm.dfm): ìƒí•˜ ë¶„í•  ë§ˆìŠ¤í„°-ë””í…Œì¼ ë©”ì¸ í¼
