@@ -45,3 +45,6 @@ Thumbs.db
 # Database & Environment Secrets
 dbconfig.ini
 *.ini.local
+
+lib2/
+

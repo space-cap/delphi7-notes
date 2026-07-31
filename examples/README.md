@@ -20,3 +20,6 @@
 | **10** | [`10_CustomUIPackDemo`](file:///c:/workdir/space-cap/delphi7-notes/examples/10_CustomUIPackDemo) | TModernButton 커스텀 VCL 패키지 제작 및 컴포넌트 실습 |
 | **11** | [`11_LoginDBDemo`](file:///c:/workdir/space-cap/delphi7-notes/examples/11_LoginDBDemo) | DB 연동 회원 로그인, SQL Injection 방지 파라미터 쿼리 & INI 설정 |
 | **12** | [`12_DataModuleUserListDemo`](file:///c:/workdir/space-cap/delphi7-notes/examples/12_DataModuleUserListDemo) | **DataModule 전역 DB 커넥션 공유 및 유저 목록(TDBGrid) 조회 실습** |
+| **13** | [`13_DevExpresscxGridDemo`](file:///h:/lee/delphi7-notes/examples/13_DevExpresscxGridDemo) | **DevExpress QuantumGrid (TcxGrid) 그룹핑, Footer 요약, 런타임 동적 컬럼 생성 & 엑셀 익스포트 실습** |
+| **14** | [`14_DevExpressMSSQLBBSDemo`](file:///h:/lee/delphi7-notes/examples/14_DevExpressMSSQLBBSDemo) | **TcxGrid + MS SQL Server 기반 게시판 CRUD (신규/조회/수정/삭제) 및 SQL 서버 페이징(SQL Paging) 연동 실습** |
+
