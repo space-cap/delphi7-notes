@@ -90,10 +90,17 @@ begin
   dtpEnd.Date := Date;
   cbStatus.ItemIndex := 0; // 전체 보기
 
-  // DB 연결 동적 로드
-  if InitDatabaseConnection then
-  begin
-    btnSearchClick(Self);
+  // DB 연결 시도 (try-except 안전 예외 처리)
+  try
+    if InitDatabaseConnection then
+    begin
+      btnSearchClick(Self);
+    end;
+  except
+    on E: Exception do
+    begin
+      lblInfo.Caption := 'DB 초기화 중 오류: ' + E.Message;
+    end;
   end;
 end;
 
@@ -166,9 +173,9 @@ begin
     on E: Exception do
     begin
       Result := False;
-      lblInfo.Caption := 'DB 연결 실패 (dbconfig.ini 확인 필요)';
+      lblInfo.Caption := 'DB 연결 실패 (dbconfig.ini 또는 ORDERDB 확인 필요)';
       ShowMessage('[DB 연결 실패]' + sLineBreak +
-                  'dbconfig.ini 설정 또는 SQL Server 구동 상태를 확인해 주세요.' + sLineBreak + sLineBreak +
+                  'dbconfig.ini 설정 또는 SQL Server 구동 상태 및 ORDERDB 생성을 확인해 주세요.' + sLineBreak + sLineBreak +
                   '오류 메세지: ' + E.Message);
     end;
   end;
@@ -180,7 +187,10 @@ var
   SQLText: string;
 begin
   if not ADOConnection1.Connected then
+  begin
+    ShowMessage('DB가 연결되어 있지 않습니다.' + sLineBreak + 'dbconfig.ini 설정 후 [조회] 버튼을 눌러주세요.');
     Exit;
+  end;
 
   CustName := Trim(edtCustomer.Text);
   StatusFilter := cbStatus.Text;
@@ -213,7 +223,10 @@ begin
     qryMaster.Open;
   except
     on E: Exception do
+    begin
       ShowMessage('주문 마스터 데이터 조회 오류:' + sLineBreak + E.Message);
+      Exit;
+    end;
   end;
 
   // 2. 디테일 쿼리 인출
@@ -230,6 +243,12 @@ end;
 
 procedure TfrmMain.btnSearchClick(Sender: TObject);
 begin
+  if not ADOConnection1.Connected then
+  begin
+    if not InitDatabaseConnection then
+      Exit;
+  end;
+
   LoadOrderData;
 end;
 
