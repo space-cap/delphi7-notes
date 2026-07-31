@@ -301,7 +301,7 @@ object frmMain: TfrmMain
         Height = 12
         Caption = ' [窍窜] 惑技 前格 格废 (Detail Items)'
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clDarkGreen
+        Font.Color = clGreen
         Font.Height = -12
         Font.Name = 'Gulim'
         Font.Style = [fsBold]
