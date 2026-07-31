@@ -1,0 +1,8 @@
+[DATABASE]
+Provider=SQLOLEDB.1
+Server=localhost\SQLEXPRESS
+Port=1433
+Database=ORDERDB
+UserID=sa
+Password=
+IntegratedSecurity=False

@@ -22,4 +22,6 @@
 | **12** | [`12_DataModuleUserListDemo`](file:///c:/workdir/space-cap/delphi7-notes/examples/12_DataModuleUserListDemo) | **DataModule 전역 DB 커넥션 공유 및 유저 목록(TDBGrid) 조회 실습** |
 | **13** | [`13_DevExpresscxGridDemo`](file:///h:/lee/delphi7-notes/examples/13_DevExpresscxGridDemo) | **DevExpress QuantumGrid (TcxGrid) 그룹핑, Footer 요약, 런타임 동적 컬럼 생성 & 엑셀 익스포트 실습** |
 | **14** | [`14_DevExpressMSSQLBBSDemo`](file:///h:/lee/delphi7-notes/examples/14_DevExpressMSSQLBBSDemo) | **TcxGrid + MS SQL Server 기반 게시판 CRUD (신규/조회/수정/삭제) 및 SQL 서버 페이징(SQL Paging) 연동 실습** |
+| **15** | [`15_DevExpressMSSQLOrderMasterDetailDemo`](file:///h:/lee/delphi7-notes/examples/15_DevExpressMSSQLOrderMasterDetailDemo) | **TcxGrid Master-Detail 계층 구조 그리드 & 기간 조건 검색(TOP 1000 제한) 및 엑셀 내보내기 실습** |
+
 
