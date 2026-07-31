@@ -4,11 +4,18 @@
 
 ---
 
-## 📚 주요 목차
+## 📚 주요 기술 문서 목차
 
-### 08. 파일 및 네트워크 (File & Network)
-1. [`01-inifile-and-stream.md`](file:///c:/workdir/space-cap/delphi7-notes/docs/08-file-network/01-inifile-and-stream.md) - INI 파일 및 TStream 사용법
-2. [`02-indy-sockets.md`](file:///c:/workdir/space-cap/delphi7-notes/docs/08-file-network/02-indy-sockets.md) - Indy 소켓 및 HTTP 통신
-3. [`03-external-process.md`](file:///c:/workdir/space-cap/delphi7-notes/docs/08-file-network/03-external-process.md) - 외부 프로세스 연동
-4. [`04-erp-image-resource-management.md`](file:///c:/workdir/space-cap/delphi7-notes/docs/08-file-network/04-erp-image-resource-management.md) - ERP 대용량 상품 이미지 자산 관리 및 보안/성능 최적화 가이드
-5. [`05-delphi-resource-management.md`](file:///c:/workdir/space-cap/delphi7-notes/docs/08-file-network/05-delphi-resource-management.md) - **델파이 7 Win32 리소스(.rc / .res) 및 메모리 자원 관리 가이드**
+### 13. DevExpress 컴포넌트 실습 (DevExpress Grid)
+- [`01-devexpress-cxgrid-step-by-step.md`](file:///h:/lee/delphi7-notes/docs/13-devexpress-grid/01-devexpress-cxgrid-step-by-step.md) - **DevExpress QuantumGrid (TcxGrid) 단계별 실습 가이드**
+
+---
+
+### 05. VCL 프레임워크 (VCL & Custom Components)
+- [`00-component-palette-guide.md`](file:///h:/lee/delphi7-notes/docs/05-vcl/00-component-palette-guide.md) - 컴포넌트 팔레트 가이드
+- [`04-custom-component-package-guide.md`](file:///h:/lee/delphi7-notes/docs/05-vcl/04-custom-component-package-guide.md) - 커스텀 VCL 패키지 제작 가이드
+
+---
+
+### 07. 데이터베이스 연동 (Database)
+- [`01-adoconnection-and-query.md`](file:///h:/lee/delphi7-notes/docs/07-database/01-adoconnection-and-query.md) - ADO 커넥션 및 쿼리 기초
