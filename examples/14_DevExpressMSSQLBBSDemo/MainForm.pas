@@ -59,6 +59,8 @@ type
     procedure tvBoardCustomDrawCell(Sender: TcxCustomGridTableView;
       ACanvas: TcxCanvas; AViewInfo: TcxGridTableDataCellViewInfo;
       var ADone: Boolean);
+    procedure edtSearchTextKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
     FCurrentPage: Integer;
@@ -298,6 +300,17 @@ begin
   lblPageInfo.Caption := Format('%d / %d 페이지 (총 %d건)', [FCurrentPage, FTotalPages, FTotalCount]);
   btnPrevPage.Enabled := (FCurrentPage > 1);
   btnNextPage.Enabled := (FCurrentPage < FTotalPages);
+end;
+
+procedure TfrmMain.edtSearchTextKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  // 검색어 상자에서 엔터(VK_RETURN) 입력 시 조회 실행 및 경고음 방지
+  if Key = VK_RETURN then
+  begin
+    Key := 0; // Windows 비프음(Beep) 방지
+    btnSearchClick(Self);
+  end;
 end;
 
 procedure TfrmMain.btnSearchClick(Sender: TObject);

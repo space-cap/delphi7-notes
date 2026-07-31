@@ -49,6 +49,7 @@ object frmMain: TfrmMain
       Width = 160
       Height = 21
       TabOrder = 0
+      OnKeyDown = edtSearchTextKeyDown
     end
     object btnSearch: TButton
       Left = 240
@@ -56,6 +57,7 @@ object frmMain: TfrmMain
       Width = 75
       Height = 25
       Caption = 'Á¶È¸'
+      Default = True
       TabOrder = 1
       OnClick = btnSearchClick
     end
