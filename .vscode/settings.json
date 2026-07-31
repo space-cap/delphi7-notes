@@ -8,7 +8,7 @@
     "*.template": "ini",
     "*.rc": "pascal"
   },
-  "files.encoding": "euckr",
+  "files.encoding": "utf8",
   "[pascal]": {
     "files.encoding": "euckr"
   },
