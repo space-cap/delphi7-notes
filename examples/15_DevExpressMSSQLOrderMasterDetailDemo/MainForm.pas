@@ -29,21 +29,21 @@ type
     pnlBottom: TPanel;
     lblInfo: TLabel;
 
-    // ADO ÄÄÆ÷³ÍÆ®
+    // ADO ì»´í¬ë„ŒíŠ¸
     ADOConnection1: TADOConnection;
     qryMaster: TADOQuery;
     dsMaster: TDataSource;
     qryDetail: TADOQuery;
     dsDetail: TDataSource;
 
-    // DevExpress Master-Detail cxGrid ÄÄÆ÷³ÍÆ®
+    // DevExpress Master-Detail cxGrid ì»´í¬ë„ŒíŠ¸
     cxGrid1: TcxGrid;
     cxGrid1Level1: TcxGridLevel;
     cxGrid1Level2: TcxGridLevel;
     tvOrderMaster: TcxGridDBTableView;
     tvOrderDetail: TcxGridDBTableView;
 
-    // Master ÄÃ·³
+    // Master ì»¬ëŸ¼
     tvOrderMasterOrderID: TcxGridDBColumn;
     tvOrderMasterOrderNo: TcxGridDBColumn;
     tvOrderMasterOrderDate: TcxGridDBColumn;
@@ -52,7 +52,7 @@ type
     tvOrderMasterTotalAmount: TcxGridDBColumn;
     tvOrderMasterRemark: TcxGridDBColumn;
 
-    // Detail ÄÃ·³
+    // Detail ì»¬ëŸ¼
     tvOrderDetailDetailID: TcxGridDBColumn;
     tvOrderDetailOrderID: TcxGridDBColumn;
     tvOrderDetailItemNo: TcxGridDBColumn;
@@ -85,12 +85,12 @@ implementation
 
 procedure TfrmMain.FormCreate(Sender: TObject);
 begin
-  // ³¯Â¥ ¹üÀ§ ±âº»°ª: ÃÖ±Ù 30ÀÏ ~ ¿À´Ã
+  // ë‚ ì§œ ë²”ìœ„ ê¸°ë³¸ê°’: ìµœê·¼ 30ì¼ ~ ì˜¤ëŠ˜
   dtpStart.Date := Date - 30;
   dtpEnd.Date := Date;
-  cbStatus.ItemIndex := 0; // ÀüÃ¼ º¸±â
+  cbStatus.ItemIndex := 0; // ì „ì²´ ë³´ê¸°
 
-  // DB ¿¬°á µ¿Àû ·Îµå
+  // DB ì—°ê²° ë™ì  ë¡œë“œ
   if InitDatabaseConnection then
   begin
     btnSearchClick(Self);
@@ -121,9 +121,9 @@ begin
     finally
       IniFile.Free;
     end;
-    ShowMessage('±âº» dbconfig.ini ÆÄÀÏÀÌ »ı¼ºµÇ¾ú½À´Ï´Ù.' + sLineBreak +
-                '¼­¹ö ¹× ·Î±×ÀÎ Á¤º¸¸¦ ¼öÁ¤ÇÑ ÈÄ »ç¿ëÇØ ÁÖ¼¼¿ä.' + sLineBreak +
-                '°æ·Î: ' + IniPath);
+    ShowMessage('ê¸°ë³¸ dbconfig.ini íŒŒì¼ì´ ìƒì„±ë˜ì—ˆìŠµë‹ˆë‹¤.' + sLineBreak +
+                'ì„œë²„ ë° ë¡œê·¸ì¸ ì •ë³´ë¥¼ ìˆ˜ì •í•œ í›„ ì‚¬ìš©í•´ ì£¼ì„¸ìš”.' + sLineBreak +
+                'ê²½ë¡œ: ' + IniPath);
   end;
 
   IniFile := TIniFile.Create(IniPath);
@@ -166,10 +166,10 @@ begin
     on E: Exception do
     begin
       Result := False;
-      lblInfo.Caption := 'DB ¿¬°á ½ÇÆĞ (dbconfig.ini È®ÀÎ ÇÊ¿ä)';
-      ShowMessage('[DB ¿¬°á ½ÇÆĞ]' + sLineBreak +
-                  'dbconfig.ini ¼³Á¤ ¶Ç´Â SQL Server ±¸µ¿ »óÅÂ¸¦ È®ÀÎÇØ ÁÖ¼¼¿ä.' + sLineBreak + sLineBreak +
-                  '¿À·ù ¸Ş¼¼Áö: ' + E.Message);
+      lblInfo.Caption := 'DB ì—°ê²° ì‹¤íŒ¨ (dbconfig.ini í™•ì¸ í•„ìš”)';
+      ShowMessage('[DB ì—°ê²° ì‹¤íŒ¨]' + sLineBreak +
+                  'dbconfig.ini ì„¤ì • ë˜ëŠ” SQL Server êµ¬ë™ ìƒíƒœë¥¼ í™•ì¸í•´ ì£¼ì„¸ìš”.' + sLineBreak + sLineBreak +
+                  'ì˜¤ë¥˜ ë©”ì„¸ì§€: ' + E.Message);
     end;
   end;
 end;
@@ -185,7 +185,7 @@ begin
   CustName := Trim(edtCustomer.Text);
   StatusFilter := cbStatus.Text;
 
-  // 1. ¸¶½ºÅÍ Äõ¸® ±¸¼º (TOP 1000 Á¶°Ç Æ÷ÇÔ)
+  // 1. ë§ˆìŠ¤í„° ì¿¼ë¦¬ êµ¬ì„± (TOP 1000 ì¡°ê±´ í¬í•¨)
   qryMaster.Close;
   SQLText := 'SELECT TOP 1000 OrderID, OrderNo, OrderDate, CustomerName, OrderStatus, TotalAmount, Remark ' +
              'FROM dbo.TB_ORDER_MASTER ' +
@@ -194,7 +194,7 @@ begin
   if CustName <> '' then
     SQLText := SQLText + 'AND CustomerName LIKE ''%'' + :Customer + ''%'' ';
 
-  if (StatusFilter <> '') and (StatusFilter <> 'ÀüÃ¼') then
+  if (StatusFilter <> '') and (StatusFilter <> 'ì „ì²´') then
     SQLText := SQLText + 'AND OrderStatus = :Status ';
 
   SQLText := SQLText + 'ORDER BY OrderID DESC';
@@ -206,17 +206,17 @@ begin
   if CustName <> '' then
     qryMaster.Parameters.ParamByName('Customer').Value := CustName;
 
-  if (StatusFilter <> '') and (StatusFilter <> 'ÀüÃ¼') then
+  if (StatusFilter <> '') and (StatusFilter <> 'ì „ì²´') then
     qryMaster.Parameters.ParamByName('Status').Value := StatusFilter;
 
   try
     qryMaster.Open;
   except
     on E: Exception do
-      ShowMessage('ÁÖ¹® ¸¶½ºÅÍ µ¥ÀÌÅÍ Á¶È¸ ¿À·ù:' + sLineBreak + E.Message);
+      ShowMessage('ì£¼ë¬¸ ë§ˆìŠ¤í„° ë°ì´í„° ì¡°íšŒ ì˜¤ë¥˜:' + sLineBreak + E.Message);
   end;
 
-  // 2. µğÅ×ÀÏ Äõ¸® ÀÎÃâ
+  // 2. ë””í…Œì¼ ì¿¼ë¦¬ ì¸ì¶œ
   qryDetail.Close;
   qryDetail.SQL.Text := 'SELECT DetailID, OrderID, ItemNo, ItemName, UnitPrice, Qty, SubTotal ' +
                         'FROM dbo.TB_ORDER_DETAIL ORDER BY OrderID, ItemNo';
@@ -225,7 +225,7 @@ begin
   except
   end;
 
-  lblInfo.Caption := Format('Á¶È¸ ¿Ï·á: ¸¶½ºÅÍ %d°Ç (ÃÖ´ë 1,000°Ç ¾ÈÀü Á¦ÇÑ)', [qryMaster.RecordCount]);
+  lblInfo.Caption := Format('ì¡°íšŒ ì™„ë£Œ: ë§ˆìŠ¤í„° %dê±´ (ìµœëŒ€ 1,000ê±´ ì•ˆì „ ì œí•œ)', [qryMaster.RecordCount]);
 end;
 
 procedure TfrmMain.btnSearchClick(Sender: TObject);
@@ -251,12 +251,12 @@ begin
   StatusVal := AViewInfo.GridRecord.Values[tvOrderMasterOrderStatus.Index];
   if not VarIsNull(StatusVal) then
   begin
-    if StatusVal = '¿Ï·á' then
+    if StatusVal = 'ì™„ë£Œ' then
     begin
       ACanvas.Font.Color := clGreen;
       ACanvas.Font.Style := [fsBold];
-    end;
-    else if StatusVal = 'Ãë¼Ò' then
+    end
+    else if StatusVal = 'ì·¨ì†Œ' then
     begin
       ACanvas.Font.Color := clRed;
       ACanvas.Font.Style := [fsStrikeOut];
@@ -270,7 +270,7 @@ var
 begin
   if qryMaster.IsEmpty then
   begin
-    ShowMessage('¿¢¼¿·Î ÀúÀåÇÒ µ¥ÀÌÅÍ°¡ ¾ø½À´Ï´Ù.');
+    ShowMessage('ì—‘ì…€ë¡œ ì €ì¥í•  ë°ì´í„°ê°€ ì—†ìŠµë‹ˆë‹¤.');
     Exit;
   end;
 
@@ -280,8 +280,8 @@ begin
     SaveDlg.FileName := Format('Order_MasterDetail_%s.xls', [FormatDateTime('YYYYMMDD', Date)]);
     if SaveDlg.Execute then
     begin
-      ExportGrid4ToExcel(SaveDlg.FileName, cxGrid1, True, True, True, 'xls');
-      ShowMessage('¼º°øÀûÀ¸·Î ¿¢¼¿ ÆÄÀÏÀÌ ÀúÀåµÇ¾ú½À´Ï´Ù:' + sLineBreak + SaveDlg.FileName);
+      ExportGridToExcel(SaveDlg.FileName, cxGrid1, True, True, True, 'xls');
+      ShowMessage('ì„±ê³µì ìœ¼ë¡œ ì—‘ì…€ íŒŒì¼ì´ ì €ì¥ë˜ì—ˆìŠµë‹ˆë‹¤:' + sLineBreak + SaveDlg.FileName);
     end;
   finally
     SaveDlg.Free;
