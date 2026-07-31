@@ -8,11 +8,11 @@
     "*.template": "ini",
     "*.rc": "pascal"
   },
-  "files.encoding": "utf8",
+  "files.encoding": "korean",
   "[pascal]": {
-    "files.encoding": "euckr"
+    "files.encoding": "korean"
   },
   "[ini]": {
-    "files.encoding": "euckr"
+    "files.encoding": "korean"
   }
 }
