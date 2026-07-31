@@ -121,7 +121,7 @@ begin
       IniFile.WriteString('DATABASE', 'Provider', 'SQLOLEDB.1');
       IniFile.WriteString('DATABASE', 'Server', 'localhost\SQLEXPRESS');
       IniFile.WriteString('DATABASE', 'Port', '1433');
-      IniFile.WriteString('DATABASE', 'Database', 'ORDERDB');
+      IniFile.WriteString('DATABASE', 'Database', 'DELPHI7_DB');
       IniFile.WriteString('DATABASE', 'UserID', 'sa');
       IniFile.WriteString('DATABASE', 'Password', '');
       IniFile.WriteBool('DATABASE', 'IntegratedSecurity', False);
@@ -138,7 +138,7 @@ begin
     Provider := IniFile.ReadString('DATABASE', 'Provider', 'SQLOLEDB.1');
     Server   := IniFile.ReadString('DATABASE', 'Server', 'localhost\SQLEXPRESS');
     Port     := IniFile.ReadString('DATABASE', 'Port', '1433');
-    Database := IniFile.ReadString('DATABASE', 'Database', 'ORDERDB');
+    Database := IniFile.ReadString('DATABASE', 'Database', 'DELPHI7_DB');
     UserID   := IniFile.ReadString('DATABASE', 'UserID', 'sa');
     Password := IniFile.ReadString('DATABASE', 'Password', '');
     UseSSPI  := IniFile.ReadBool('DATABASE', 'IntegratedSecurity', False);

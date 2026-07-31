@@ -2,7 +2,7 @@
 Provider=SQLOLEDB.1
 Server=127.0.0.1
 Port=1433
-Database=BBSDB
+Database=DELPHI7_DB
 UserID=sa
 Password=
 IntegratedSecurity=False

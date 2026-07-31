@@ -1,19 +1,18 @@
 ﻿-- =========================================================
--- DevExpress TcxGrid 주문 마스터-디테일(Master-Detail) 실습 DB 스크립트
--- Target DB: Microsoft SQL Server 2000 / 2005 / 2008 / 2012+
+-- 통합 DB: DELPHI7_DB
 -- =========================================================
 
 USE master;
 GO
 
-IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = N'ORDERDB')
+IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = N'DELPHI7_DB')
 BEGIN
-    CREATE DATABASE [ORDERDB];
-    PRINT 'ORDERDB 데이터베이스가 성공적으로 생성되었습니다.';
+    CREATE DATABASE [DELPHI7_DB];
+    PRINT 'DELPHI7_DB 데이터베이스가 성공적으로 생성되었습니다.';
 END
 GO
 
-USE [ORDERDB];
+USE [DELPHI7_DB];
 GO
 
 -- 1. 기존 테이블 삭제
@@ -21,35 +20,35 @@ IF OBJECT_ID('dbo.TB_ORDER_DETAIL', 'U') IS NOT NULL DROP TABLE dbo.TB_ORDER_DET
 IF OBJECT_ID('dbo.TB_ORDER_MASTER', 'U') IS NOT NULL DROP TABLE dbo.TB_ORDER_MASTER;
 GO
 
--- 2. 주문 마스터 테이블 생성 (TB_ORDER_MASTER)
+-- 2. 수주 마스터 테이블 생성
 CREATE TABLE dbo.TB_ORDER_MASTER (
-    OrderID      INT IDENTITY(1,1) NOT NULL, -- 주문 고유번호 (PK)
-    OrderNo      NVARCHAR(20) NOT NULL,       -- 주문 번호 (예: ORD-202607-0001)
-    OrderDate    DATETIME NOT NULL,           -- 주문 일자
-    CustomerName NVARCHAR(100) NOT NULL,      -- 고객사 / 거래처명
-    OrderStatus  NVARCHAR(20) DEFAULT N'접수' NOT NULL, -- 상태 (접수, 진행중, 완료, 취소)
-    TotalAmount  MONEY DEFAULT 0 NOT NULL,    -- 총 주문 금액
-    Remark       NVARCHAR(200) NULL,          -- 비고 / 메모
+    OrderID      INT IDENTITY(1,1) NOT NULL,
+    OrderNo      NVARCHAR(20) NOT NULL,
+    OrderDate    DATETIME NOT NULL,
+    CustomerName NVARCHAR(100) NOT NULL,
+    OrderStatus  NVARCHAR(20) DEFAULT N'접수' NOT NULL,
+    TotalAmount  MONEY DEFAULT 0 NOT NULL,
+    Remark       NVARCHAR(200) NULL,
     RegDate      DATETIME DEFAULT GETDATE() NOT NULL,
     CONSTRAINT PK_TB_ORDER_MASTER PRIMARY KEY CLUSTERED (OrderID)
 );
 GO
 
--- 3. 주문 디테일 (품목) 테이블 생성 (TB_ORDER_DETAIL)
+-- 3. 수주 디테일 테이블 생성
 CREATE TABLE dbo.TB_ORDER_DETAIL (
-    DetailID    INT IDENTITY(1,1) NOT NULL,  -- 디테일 고유번호 (PK)
-    OrderID     INT NOT NULL,                -- 마스터 주문번호 (FK)
-    ItemNo      INT NOT NULL,                -- 품목 순번 (1, 2, 3...)
-    ItemName    NVARCHAR(100) NOT NULL,       -- 품목명 / 상품명
-    UnitPrice   MONEY DEFAULT 0 NOT NULL,     -- 단가
-    Qty         INT DEFAULT 1 NOT NULL,       -- 수량
-    SubTotal    MONEY DEFAULT 0 NOT NULL,     -- 공급가액 (단가 * 수량)
+    DetailID    INT IDENTITY(1,1) NOT NULL,
+    OrderID     INT NOT NULL,
+    ItemNo      INT NOT NULL,
+    ItemName    NVARCHAR(100) NOT NULL,
+    UnitPrice   MONEY DEFAULT 0 NOT NULL,
+    Qty         INT DEFAULT 1 NOT NULL,
+    SubTotal    MONEY DEFAULT 0 NOT NULL,
     CONSTRAINT PK_TB_ORDER_DETAIL PRIMARY KEY CLUSTERED (DetailID),
     CONSTRAINT FK_ORDER_DETAIL_MASTER FOREIGN KEY (OrderID) REFERENCES dbo.TB_ORDER_MASTER(OrderID) ON DELETE CASCADE
 );
 GO
 
--- 4. 마스터 및 디테일 샘플 데이터 입력
+-- 4. 샘플 데이터 입력 (50건 수주 / 150건 품목)
 SET NOCOUNT ON;
 BEGIN TRANSACTION;
 
@@ -90,7 +89,6 @@ BEGIN
     SET @MasterTotal = 0;
     SET @j = 1;
 
-    -- 주문 품목 2~4개 생성
     WHILE @j <= ((@i % 3) + 2)
     BEGIN
         DECLARE @ProdName NVARCHAR(100);
@@ -109,7 +107,6 @@ BEGIN
         SET @j = @j + 1;
     END
 
-    -- 마스터 총 금액 업데이트
     UPDATE dbo.TB_ORDER_MASTER SET TotalAmount = @MasterTotal WHERE OrderID = @OrderID;
 
     SET @i = @i + 1;
@@ -118,7 +115,5 @@ END
 COMMIT TRANSACTION;
 GO
 
--- 5. 생성 검증 조회
-SELECT TOP 10 * FROM dbo.TB_ORDER_MASTER ORDER BY OrderID DESC;
-SELECT TOP 20 * FROM dbo.TB_ORDER_DETAIL ORDER BY DetailID DESC;
-GO
+SELECT COUNT(*) AS [TB_ORDER_MASTER_건수] FROM dbo.TB_ORDER_MASTER;
+

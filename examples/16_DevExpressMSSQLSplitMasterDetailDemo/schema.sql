@@ -1,19 +1,18 @@
 ﻿-- =========================================================
--- DevExpress TcxGrid 상하 분할(Split-Panel) 마스터-디테일 실습 DB 스크립트
--- Target DB: Microsoft SQL Server 2000 / 2005 / 2008 / 2012+
+-- 통합 DB: DELPHI7_DB
 -- =========================================================
 
 USE master;
 GO
 
-IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = N'SALESDB')
+IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = N'DELPHI7_DB')
 BEGIN
-    CREATE DATABASE [SALESDB];
-    PRINT 'SALESDB 데이터베이스가 성공적으로 생성되었습니다.';
+    CREATE DATABASE [DELPHI7_DB];
+    PRINT 'DELPHI7_DB 데이터베이스가 성공적으로 생성되었습니다.';
 END
 GO
 
-USE [SALESDB];
+USE [DELPHI7_DB];
 GO
 
 -- 1. 기존 테이블 삭제
@@ -21,37 +20,37 @@ IF OBJECT_ID('dbo.TB_SALES_DETAIL', 'U') IS NOT NULL DROP TABLE dbo.TB_SALES_DET
 IF OBJECT_ID('dbo.TB_SALES_MASTER', 'U') IS NOT NULL DROP TABLE dbo.TB_SALES_MASTER;
 GO
 
--- 2. 매출 전표 마스터 테이블 생성 (TB_SALES_MASTER)
+-- 2. 매출 전표 마스터 테이블 생성
 CREATE TABLE dbo.TB_SALES_MASTER (
-    SalesID       INT IDENTITY(1,1) NOT NULL,  -- 매출 고유번호 (PK)
-    SalesNo       NVARCHAR(20) NOT NULL,        -- 매출 전표번호 (예: SL-202607-0001)
-    SalesDate     DATETIME NOT NULL,            -- 매출 일자
-    ClientName    NVARCHAR(100) NOT NULL,       -- 거래처명
-    SalesRep      NVARCHAR(50) NOT NULL,        -- 담당 영업사원
-    PaymentStatus NVARCHAR(20) DEFAULT N'미수' NOT NULL, -- 결제 상태 (완납, 미수, 부분입금)
-    TotalPrice    MONEY DEFAULT 0 NOT NULL,     -- 총 매출금액
-    Remark        NVARCHAR(200) NULL,           -- 적요 / 메모
+    SalesID       INT IDENTITY(1,1) NOT NULL,
+    SalesNo       NVARCHAR(20) NOT NULL,
+    SalesDate     DATETIME NOT NULL,
+    ClientName    NVARCHAR(100) NOT NULL,
+    SalesRep      NVARCHAR(50) NOT NULL,
+    PaymentStatus NVARCHAR(20) DEFAULT N'미수' NOT NULL,
+    TotalPrice    MONEY DEFAULT 0 NOT NULL,
+    Remark        NVARCHAR(200) NULL,
     RegDate       DATETIME DEFAULT GETDATE() NOT NULL,
     CONSTRAINT PK_TB_SALES_MASTER PRIMARY KEY CLUSTERED (SalesID)
 );
 GO
 
--- 3. 매출 전표 디테일 (품목) 테이블 생성 (TB_SALES_DETAIL)
+-- 3. 매출 전표 디테일 테이블 생성
 CREATE TABLE dbo.TB_SALES_DETAIL (
-    DetailID    INT IDENTITY(1,1) NOT NULL,   -- 상세 고유번호 (PK)
-    SalesID     INT NOT NULL,                 -- 마스터 매출번호 (FK)
-    LineNo      INT NOT NULL,                 -- 품목 라인번호 (1, 2, 3...)
-    ItemCode    NVARCHAR(20) NOT NULL,        -- 품목 코드
-    ItemName    NVARCHAR(100) NOT NULL,       -- 품목명
-    Price       MONEY DEFAULT 0 NOT NULL,     -- 단가
-    Qty         INT DEFAULT 1 NOT NULL,       -- 수량
-    Amount      MONEY DEFAULT 0 NOT NULL,     -- 공급가액
+    DetailID    INT IDENTITY(1,1) NOT NULL,
+    SalesID     INT NOT NULL,
+    LineNo      INT NOT NULL,
+    ItemCode    NVARCHAR(20) NOT NULL,
+    ItemName    NVARCHAR(100) NOT NULL,
+    Price       MONEY DEFAULT 0 NOT NULL,
+    Qty         INT DEFAULT 1 NOT NULL,
+    Amount      MONEY DEFAULT 0 NOT NULL,
     CONSTRAINT PK_TB_SALES_DETAIL PRIMARY KEY CLUSTERED (DetailID),
     CONSTRAINT FK_SALES_DETAIL_MASTER FOREIGN KEY (SalesID) REFERENCES dbo.TB_SALES_MASTER(SalesID) ON DELETE CASCADE
 );
 GO
 
--- 4. 샘플 데이터 대량 입력 (40건 전표 / 120건 품목)
+-- 4. 샘플 데이터 입력 (40건 전표 / 120건 품목)
 SET NOCOUNT ON;
 BEGIN TRANSACTION;
 
@@ -127,6 +126,5 @@ END
 COMMIT TRANSACTION;
 GO
 
-SELECT TOP 10 * FROM dbo.TB_SALES_MASTER ORDER BY SalesID DESC;
-SELECT TOP 20 * FROM dbo.TB_SALES_DETAIL ORDER BY DetailID DESC;
-GO
+SELECT COUNT(*) AS [TB_SALES_MASTER_건수] FROM dbo.TB_SALES_MASTER;
+

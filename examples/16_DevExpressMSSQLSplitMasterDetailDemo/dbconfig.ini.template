@@ -2,7 +2,7 @@
 Provider=SQLOLEDB.1
 Server=localhost\SQLEXPRESS
 Port=1433
-Database=SALESDB
+Database=DELPHI7_DB
 UserID=sa
 Password=
 IntegratedSecurity=False
