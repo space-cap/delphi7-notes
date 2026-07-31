@@ -321,8 +321,6 @@ object frmMain: TfrmMain
   end
   object qryDetail: TADOQuery
     Connection = ADOConnection1
-    DataSource = dsMaster
-    MasterFields = 'OrderID'
     Parameters = <>
     Left = 245
     Top = 120
