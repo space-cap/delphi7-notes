@@ -1,5 +1,5 @@
--- =========================================================
--- DevExpress TcxGrid ÁÖ¹® ¸¶½ºÅÍ-µðÅ×ÀÏ(Master-Detail) ½Ç½À DB ½ºÅ©¸³Æ®
+ï»¿-- =========================================================
+-- DevExpress TcxGrid ì£¼ë¬¸ ë§ˆìŠ¤í„°-ë””í…Œì¼(Master-Detail) ì‹¤ìŠµ DB ìŠ¤í¬ë¦½íŠ¸
 -- Target DB: Microsoft SQL Server 2000 / 2005 / 2008 / 2012+
 -- =========================================================
 
@@ -9,47 +9,47 @@ GO
 IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = N'ORDERDB')
 BEGIN
     CREATE DATABASE [ORDERDB];
-    PRINT 'ORDERDB µ¥ÀÌÅÍº£ÀÌ½º°¡ ¼º°øÀûÀ¸·Î »ý¼ºµÇ¾ú½À´Ï´Ù.';
+    PRINT 'ORDERDB ë°ì´í„°ë² ì´ìŠ¤ê°€ ì„±ê³µì ìœ¼ë¡œ ìƒì„±ë˜ì—ˆìŠµë‹ˆë‹¤.';
 END
 GO
 
 USE [ORDERDB];
 GO
 
--- 1. ±âÁ¸ Å×ÀÌºí »èÁ¦
+-- 1. ê¸°ì¡´ í…Œì´ë¸” ì‚­ì œ
 IF OBJECT_ID('dbo.TB_ORDER_DETAIL', 'U') IS NOT NULL DROP TABLE dbo.TB_ORDER_DETAIL;
 IF OBJECT_ID('dbo.TB_ORDER_MASTER', 'U') IS NOT NULL DROP TABLE dbo.TB_ORDER_MASTER;
 GO
 
--- 2. ÁÖ¹® ¸¶½ºÅÍ Å×ÀÌºí »ý¼º (TB_ORDER_MASTER)
+-- 2. ì£¼ë¬¸ ë§ˆìŠ¤í„° í…Œì´ë¸” ìƒì„± (TB_ORDER_MASTER)
 CREATE TABLE dbo.TB_ORDER_MASTER (
-    OrderID      INT IDENTITY(1,1) NOT NULL, -- ÁÖ¹® °íÀ¯¹øÈ£ (PK)
-    OrderNo      NVARCHAR(20) NOT NULL,       -- ÁÖ¹® ¹øÈ£ (¿¹: ORD-202607-0001)
-    OrderDate    DATETIME NOT NULL,           -- ÁÖ¹® ÀÏÀÚ
-    CustomerName NVARCHAR(100) NOT NULL,      -- °í°´»ç / °Å·¡Ã³¸í
-    OrderStatus  NVARCHAR(20) DEFAULT N'Á¢¼ö' NOT NULL, -- »óÅÂ (Á¢¼ö, ÁøÇàÁß, ¿Ï·á, Ãë¼Ò)
-    TotalAmount  MONEY DEFAULT 0 NOT NULL,    -- ÃÑ ÁÖ¹® ±Ý¾×
-    Remark       NVARCHAR(200) NULL,          -- ºñ°í / ¸Þ¸ð
+    OrderID      INT IDENTITY(1,1) NOT NULL, -- ì£¼ë¬¸ ê³ ìœ ë²ˆí˜¸ (PK)
+    OrderNo      NVARCHAR(20) NOT NULL,       -- ì£¼ë¬¸ ë²ˆí˜¸ (ì˜ˆ: ORD-202607-0001)
+    OrderDate    DATETIME NOT NULL,           -- ì£¼ë¬¸ ì¼ìž
+    CustomerName NVARCHAR(100) NOT NULL,      -- ê³ ê°ì‚¬ / ê±°ëž˜ì²˜ëª…
+    OrderStatus  NVARCHAR(20) DEFAULT N'ì ‘ìˆ˜' NOT NULL, -- ìƒíƒœ (ì ‘ìˆ˜, ì§„í–‰ì¤‘, ì™„ë£Œ, ì·¨ì†Œ)
+    TotalAmount  MONEY DEFAULT 0 NOT NULL,    -- ì´ ì£¼ë¬¸ ê¸ˆì•¡
+    Remark       NVARCHAR(200) NULL,          -- ë¹„ê³  / ë©”ëª¨
     RegDate      DATETIME DEFAULT GETDATE() NOT NULL,
     CONSTRAINT PK_TB_ORDER_MASTER PRIMARY KEY CLUSTERED (OrderID)
 );
 GO
 
--- 3. ÁÖ¹® µðÅ×ÀÏ (Ç°¸ñ) Å×ÀÌºí »ý¼º (TB_ORDER_DETAIL)
+-- 3. ì£¼ë¬¸ ë””í…Œì¼ (í’ˆëª©) í…Œì´ë¸” ìƒì„± (TB_ORDER_DETAIL)
 CREATE TABLE dbo.TB_ORDER_DETAIL (
-    DetailID    INT IDENTITY(1,1) NOT NULL,  -- µðÅ×ÀÏ °íÀ¯¹øÈ£ (PK)
-    OrderID     INT NOT NULL,                -- ¸¶½ºÅÍ ÁÖ¹®¹øÈ£ (FK)
-    ItemNo      INT NOT NULL,                -- Ç°¸ñ ¼ø¹ø (1, 2, 3...)
-    ItemName    NVARCHAR(100) NOT NULL,       -- Ç°¸ñ¸í / »óÇ°¸í
-    UnitPrice   MONEY DEFAULT 0 NOT NULL,     -- ´Ü°¡
-    Qty         INT DEFAULT 1 NOT NULL,       -- ¼ö·®
-    SubTotal    MONEY DEFAULT 0 NOT NULL,     -- °ø±Þ°¡¾× (´Ü°¡ * ¼ö·®)
+    DetailID    INT IDENTITY(1,1) NOT NULL,  -- ë””í…Œì¼ ê³ ìœ ë²ˆí˜¸ (PK)
+    OrderID     INT NOT NULL,                -- ë§ˆìŠ¤í„° ì£¼ë¬¸ë²ˆí˜¸ (FK)
+    ItemNo      INT NOT NULL,                -- í’ˆëª© ìˆœë²ˆ (1, 2, 3...)
+    ItemName    NVARCHAR(100) NOT NULL,       -- í’ˆëª©ëª… / ìƒí’ˆëª…
+    UnitPrice   MONEY DEFAULT 0 NOT NULL,     -- ë‹¨ê°€
+    Qty         INT DEFAULT 1 NOT NULL,       -- ìˆ˜ëŸ‰
+    SubTotal    MONEY DEFAULT 0 NOT NULL,     -- ê³µê¸‰ê°€ì•¡ (ë‹¨ê°€ * ìˆ˜ëŸ‰)
     CONSTRAINT PK_TB_ORDER_DETAIL PRIMARY KEY CLUSTERED (DetailID),
     CONSTRAINT FK_ORDER_DETAIL_MASTER FOREIGN KEY (OrderID) REFERENCES dbo.TB_ORDER_MASTER(OrderID) ON DELETE CASCADE
 );
 GO
 
--- 4. ¸¶½ºÅÍ ¹× µðÅ×ÀÏ »ùÇÃ µ¥ÀÌÅÍ ÀÔ·Â
+-- 4. ë§ˆìŠ¤í„° ë° ë””í…Œì¼ ìƒ˜í”Œ ë°ì´í„° ìž…ë ¥
 SET NOCOUNT ON;
 BEGIN TRANSACTION;
 
@@ -64,13 +64,13 @@ DECLARE @MasterTotal MONEY;
 
 DECLARE @Customers TABLE (ID INT IDENTITY(1,1), Name NVARCHAR(100));
 INSERT INTO @Customers (Name) VALUES 
-(N'(ÁÖ)»ï¼ºÀüÀÚ'), (N'(ÁÖ)LGÀüÀÚ'), (N'SKÇÏÀÌ´Ð½º(ÁÖ)'), (N'Çö´ëÀÚµ¿Â÷(ÁÖ)'),
-(N'Æ÷½ºÄÚÈ¦µù½º(ÁÖ)'), (N'(ÁÖ)ÇÑÈ­'), (N'³×ÀÌ¹ö(ÁÖ)'), (N'(ÁÖ)Ä«Ä«¿À');
+(N'(ì£¼)ì‚¼ì„±ì „ìž'), (N'(ì£¼)LGì „ìž'), (N'SKí•˜ì´ë‹‰ìŠ¤(ì£¼)'), (N'í˜„ëŒ€ìžë™ì°¨(ì£¼)'),
+(N'í¬ìŠ¤ì½”í™€ë”©ìŠ¤(ì£¼)'), (N'(ì£¼)í•œí™”'), (N'ë„¤ì´ë²„(ì£¼)'), (N'(ì£¼)ì¹´ì¹´ì˜¤');
 
 DECLARE @Products TABLE (ID INT IDENTITY(1,1), Name NVARCHAR(100), Price MONEY);
 INSERT INTO @Products (Name, Price) VALUES 
-(N'27ÀÎÄ¡ 4K ¸ð´ÏÅÍ', 450000), (N'¹«¼± ±â°è½Ä Å°º¸µå', 120000), (N'ÀÎ°øÁö´É ¸¶¿ì½º', 85000),
-(N'USB-C ¸ÖÆ¼ Çãºê', 45000), (N'½º¸¶Æ® ¿öÅ©½ºÅ×ÀÌ¼Ç PC', 2100000), (N'³ëÀÌÁîÄµ½½¸µ Çìµå¼Â', 280000);
+(N'27ì¸ì¹˜ 4K ëª¨ë‹ˆí„°', 450000), (N'ë¬´ì„  ê¸°ê³„ì‹ í‚¤ë³´ë“œ', 120000), (N'ì¸ê³µì§€ëŠ¥ ë§ˆìš°ìŠ¤', 85000),
+(N'USB-C ë©€í‹° í—ˆë¸Œ', 45000), (N'ìŠ¤ë§ˆíŠ¸ ì›Œí¬ìŠ¤í…Œì´ì…˜ PC', 2100000), (N'ë…¸ì´ì¦ˆìº”ìŠ¬ë§ í—¤ë“œì…‹', 280000);
 
 WHILE @i <= 50
 BEGIN
@@ -78,19 +78,19 @@ BEGIN
     SET @OrderDate = DATEADD(DAY, -(@i % 30), GETDATE());
     SELECT @Customer = Name FROM @Customers WHERE ID = ((@i % 8) + 1);
     
-    IF @i % 4 = 0 SET @Status = N'¿Ï·á';
-    ELSE IF @i % 3 = 0 SET @Status = N'ÁøÇàÁß';
-    ELSE IF @i % 7 = 0 SET @Status = N'Ãë¼Ò';
-    ELSE SET @Status = N'Á¢¼ö';
+    IF @i % 4 = 0 SET @Status = N'ì™„ë£Œ';
+    ELSE IF @i % 3 = 0 SET @Status = N'ì§„í–‰ì¤‘';
+    ELSE IF @i % 7 = 0 SET @Status = N'ì·¨ì†Œ';
+    ELSE SET @Status = N'ì ‘ìˆ˜';
 
     INSERT INTO dbo.TB_ORDER_MASTER (OrderNo, OrderDate, CustomerName, OrderStatus, TotalAmount, Remark)
-    VALUES (@OrderNo, @OrderDate, @Customer, @Status, 0, N'»ó¹Ý±â Á¤±â ±¸¸Å°Ç ' + CAST(@i AS VARCHAR(5)));
+    VALUES (@OrderNo, @OrderDate, @Customer, @Status, 0, N'ìƒë°˜ê¸° ì •ê¸° êµ¬ë§¤ê±´ ' + CAST(@i AS VARCHAR(5)));
 
     SET @OrderID = SCOPE_IDENTITY();
     SET @MasterTotal = 0;
     SET @j = 1;
 
-    -- ÁÖ¹® Ç°¸ñ 2~4°³ »ý¼º
+    -- ì£¼ë¬¸ í’ˆëª© 2~4ê°œ ìƒì„±
     WHILE @j <= ((@i % 3) + 2)
     BEGIN
         DECLARE @ProdName NVARCHAR(100);
@@ -109,7 +109,7 @@ BEGIN
         SET @j = @j + 1;
     END
 
-    -- ¸¶½ºÅÍ ÃÑ ±Ý¾× ¾÷µ¥ÀÌÆ®
+    -- ë§ˆìŠ¤í„° ì´ ê¸ˆì•¡ ì—…ë°ì´íŠ¸
     UPDATE dbo.TB_ORDER_MASTER SET TotalAmount = @MasterTotal WHERE OrderID = @OrderID;
 
     SET @i = @i + 1;
@@ -118,7 +118,7 @@ END
 COMMIT TRANSACTION;
 GO
 
--- 5. »ý¼º °ËÁõ Á¶È¸
+-- 5. ìƒì„± ê²€ì¦ ì¡°íšŒ
 SELECT TOP 10 * FROM dbo.TB_ORDER_MASTER ORDER BY OrderID DESC;
 SELECT TOP 20 * FROM dbo.TB_ORDER_DETAIL ORDER BY DetailID DESC;
 GO
