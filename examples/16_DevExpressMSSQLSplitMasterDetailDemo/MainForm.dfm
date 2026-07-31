@@ -351,7 +351,7 @@ object frmMain: TfrmMain
         end
         object tvSalesDetailLineNo: TcxGridDBColumn
           Caption = '¼ø¹ø'
-          DataBinding.FieldName = 'LineNo'
+          DataBinding.FieldName = 'ItemSeq'
           HeaderAlignmentHorz = taCenter
           Width = 50
         end

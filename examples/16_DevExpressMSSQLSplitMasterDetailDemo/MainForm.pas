@@ -259,10 +259,10 @@ begin
   qryDetail.DisableControls;
   try
     qryDetail.Close;
-    qryDetail.SQL.Text := 'SELECT DetailID, SalesID, LineNo, ItemCode, ItemName, Price, Qty, Amount ' +
+    qryDetail.SQL.Text := 'SELECT DetailID, SalesID, ItemSeq, ItemCode, ItemName, Price, Qty, Amount ' +
                           'FROM dbo.TB_SALES_DETAIL ' +
                           'WHERE SalesID = :SalesID ' +
-                          'ORDER BY LineNo ASC';
+                          'ORDER BY ItemSeq ASC';
     qryDetail.Parameters.ParamByName('SalesID').Value := ASalesID;
     try
       qryDetail.Open;

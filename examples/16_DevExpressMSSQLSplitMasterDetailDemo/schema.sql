@@ -39,7 +39,7 @@ GO
 CREATE TABLE dbo.TB_SALES_DETAIL (
     DetailID    INT IDENTITY(1,1) NOT NULL,
     SalesID     INT NOT NULL,
-    LineNo      INT NOT NULL,
+    ItemSeq     INT NOT NULL,
     ItemCode    NVARCHAR(20) NOT NULL,
     ItemName    NVARCHAR(100) NOT NULL,
     Price       MONEY DEFAULT 0 NOT NULL,
@@ -112,7 +112,7 @@ BEGIN
         SET @Amount = @UnitPrice * @Qty;
         SET @MasterTotal = @MasterTotal + @Amount;
 
-        INSERT INTO dbo.TB_SALES_DETAIL (SalesID, LineNo, ItemCode, ItemName, Price, Qty, Amount)
+        INSERT INTO dbo.TB_SALES_DETAIL (SalesID, ItemSeq, ItemCode, ItemName, Price, Qty, Amount)
         VALUES (@SalesID, @j, @Code, @ProdName, @UnitPrice, @Qty, @Amount);
 
         SET @j = @j + 1;
