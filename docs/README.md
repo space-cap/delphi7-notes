@@ -8,7 +8,8 @@
 
 ### 13. DevExpress 컴포넌트 실습 (DevExpress Grid)
 - [`01-devexpress-cxgrid-step-by-step.md`](file:///h:/lee/delphi7-notes/docs/13-devexpress-grid/01-devexpress-cxgrid-step-by-step.md) - **DevExpress QuantumGrid (TcxGrid) 단계별 실습 가이드 1편 (메모리 데이터셋 & 기본 기능)**
-- [`02-devexpress-cxgrid-db-users-step-by-step.md`](file:///h:/lee/delphi7-notes/docs/13-devexpress-grid/02-devexpress-cxgrid-db-users-step-by-step.md) - **DevExpress QuantumGrid (TcxGrid) 단계별 실습 가이드 2편 (MS SQL Server 연동 & Users 조회)**
+- [`02-devexpress-cxgrid-db-users-step-by-step.md`](file:///h:/lee/delphi7-notes/docs/13-devexpress-grid/02-devexpress-cxgrid-db-users-step-by-step.md) - **DevExpress QuantumGrid (TcxGrid) 단계별 실습 가이드 2편 (MS SQL Server 연동 & Users 조회 - 디자인타임 방식)**
+- [`03-devexpress-cxgrid-runtime-pas-setup.md`](file:///h:/lee/delphi7-notes/docs/13-devexpress-grid/03-devexpress-cxgrid-runtime-pas-setup.md) - **DevExpress QuantumGrid (TcxGrid) 단계별 실습 가이드 3편 (실무형 PAS 런타임 동적 컬럼 & 헬퍼 함수 패턴)**
 
 ---
 
