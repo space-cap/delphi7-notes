@@ -7,7 +7,8 @@
 ## 📚 주요 기술 문서 목차
 
 ### 13. DevExpress 컴포넌트 실습 (DevExpress Grid)
-- [`01-devexpress-cxgrid-step-by-step.md`](file:///h:/lee/delphi7-notes/docs/13-devexpress-grid/01-devexpress-cxgrid-step-by-step.md) - **DevExpress QuantumGrid (TcxGrid) 단계별 실습 가이드**
+- [`01-devexpress-cxgrid-step-by-step.md`](file:///h:/lee/delphi7-notes/docs/13-devexpress-grid/01-devexpress-cxgrid-step-by-step.md) - **DevExpress QuantumGrid (TcxGrid) 단계별 실습 가이드 1편 (메모리 데이터셋 & 기본 기능)**
+- [`02-devexpress-cxgrid-db-users-step-by-step.md`](file:///h:/lee/delphi7-notes/docs/13-devexpress-grid/02-devexpress-cxgrid-db-users-step-by-step.md) - **DevExpress QuantumGrid (TcxGrid) 단계별 실습 가이드 2편 (MS SQL Server 연동 & Users 조회)**
 
 ---
 

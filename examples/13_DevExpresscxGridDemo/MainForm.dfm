@@ -1,9 +1,9 @@
 object frmMain: TfrmMain
-  Left = 250
-  Top = 150
+  Left = 667
+  Top = 278
   Width = 920
   Height = 600
-  Caption = 'DevExpress TcxGrid 실습 데모 (QuantumGrid 6)'
+  Caption = 'DevExpress TcxGrid '#49892#49845' '#45936#47784' (QuantumGrid 6)'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -26,9 +26,9 @@ object frmMain: TfrmMain
     object lblTitle: TLabel
       Left = 16
       Top = 10
-      Width = 330
-      Height = 19
-      Caption = 'DevExpress TcxGrid (QuantumGrid) 실습 데모'
+      Width = 370
+      Height = 16
+      Caption = 'DevExpress TcxGrid (QuantumGrid) '#49892#49845' '#45936#47784
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clNavy
       Font.Height = -16
@@ -41,7 +41,7 @@ object frmMain: TfrmMain
       Top = 35
       Width = 110
       Height = 25
-      Caption = '데이터 재로드'
+      Caption = #45936#51060#53552' '#51116#47196#46300
       TabOrder = 0
       OnClick = btnInitDataClick
     end
@@ -50,7 +50,7 @@ object frmMain: TfrmMain
       Top = 35
       Width = 110
       Height = 25
-      Caption = '부서별 그룹핑'
+      Caption = #48512#49436#48324' '#44536#47353#54609
       TabOrder = 1
       OnClick = btnGroupDeptClick
     end
@@ -59,7 +59,7 @@ object frmMain: TfrmMain
       Top = 35
       Width = 110
       Height = 25
-      Caption = '그룹핑 해제'
+      Caption = #44536#47353#54609' '#54644#51228
       TabOrder = 2
       OnClick = btnClearGroupClick
     end
@@ -68,7 +68,7 @@ object frmMain: TfrmMain
       Top = 35
       Width = 120
       Height = 25
-      Caption = '필터행 토글'
+      Caption = #54596#53552#54665' '#53664#44544
       TabOrder = 3
       OnClick = btnToggleFilterRowClick
     end
@@ -77,7 +77,7 @@ object frmMain: TfrmMain
       Top = 35
       Width = 130
       Height = 25
-      Caption = '동적 컬럼 추가'
+      Caption = #46041#51201' '#52972#47100' '#52628#44032
       TabOrder = 4
       OnClick = btnDynamicColumnClick
     end
@@ -86,7 +86,7 @@ object frmMain: TfrmMain
       Top = 35
       Width = 120
       Height = 25
-      Caption = '엑셀 내보내기'
+      Caption = #50641#49472' '#45236#48372#45236#44592
       TabOrder = 5
       OnClick = btnExportExcelClick
     end
@@ -107,37 +107,36 @@ object frmMain: TfrmMain
       DataController.Summary.SummaryGroups = <>
       OptionsBehavior.FocusCellOnTab = True
       OptionsBehavior.GoToNextCellOnEnter = True
-      OptionsData.Editing = True
       OptionsView.CellAutoHeight = True
       OptionsView.ColumnAutoWidth = True
       OptionsView.Footer = True
       OptionsView.GroupFooters = gfAlwaysVisible
       object tvEmpEmpID: TcxGridDBColumn
-        Caption = '사번'
+        Caption = #49324#48264
         DataBinding.FieldName = 'EmpID'
         HeaderAlignmentHorz = taCenter
         Width = 70
       end
       object tvEmpEmpName: TcxGridDBColumn
-        Caption = '성명'
+        Caption = #49457#47749
         DataBinding.FieldName = 'EmpName'
         HeaderAlignmentHorz = taCenter
         Width = 100
       end
       object tvEmpDeptName: TcxGridDBColumn
-        Caption = '부서명'
+        Caption = #48512#49436#47749
         DataBinding.FieldName = 'DeptName'
         HeaderAlignmentHorz = taCenter
         Width = 120
       end
       object tvEmpPosition: TcxGridDBColumn
-        Caption = '직급'
+        Caption = #51649#44553
         DataBinding.FieldName = 'Position'
         HeaderAlignmentHorz = taCenter
         Width = 100
       end
       object tvEmpSalary: TcxGridDBColumn
-        Caption = '연봉/급여'
+        Caption = #50672#48393'/'#44553#50668
         DataBinding.FieldName = 'Salary'
         PropertiesClassName = 'TcxCurrencyEditProperties'
         HeaderAlignmentHorz = taCenter
@@ -145,14 +144,14 @@ object frmMain: TfrmMain
         Width = 120
       end
       object tvEmpHireDate: TcxGridDBColumn
-        Caption = '입사일자'
+        Caption = #51077#49324#51068#51088
         DataBinding.FieldName = 'HireDate'
         PropertiesClassName = 'TcxDateEditProperties'
         HeaderAlignmentHorz = taCenter
         Width = 110
       end
       object tvEmpIsActive: TcxGridDBColumn
-        Caption = '재직 여부'
+        Caption = #51116#51649' '#50668#48512
         DataBinding.FieldName = 'IsActive'
         PropertiesClassName = 'TcxCheckBoxProperties'
         HeaderAlignmentHorz = taCenter
