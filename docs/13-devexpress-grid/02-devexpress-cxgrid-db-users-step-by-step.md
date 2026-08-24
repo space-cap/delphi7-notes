@@ -9,10 +9,10 @@
 2. [1단계: MS SQL Server 데이터베이스 & 테이블 구축 (DDL/DML)](#2-1단계-ms-sql-server-데이터베이스--테이블-구축-ddldml)
 3. [2단계: 델파이 7 프로젝트 생성 및 화면 컨트롤 배치](#3-2단계-델파이-7-프로젝트-생성-및-화면-컨트롤-배치)
 4. [3단계: ADO 컴포넌트 구성 (TADOConnection, TADOQuery, TDataSource)](#4-3단계-ado-컴포넌트-구성-tadoconnection-tadoquery-tdatasource)
-5. [5단계: TcxGrid 데이터 바인딩 및 컬럼 커스터마이징](#5-4단계-tcxgrid-데이터-바인딩-및-컬럼-커스터마이징)
-6. [6단계: 핵심 소스 코드 구현 (MainForm.pas)](#6-5단계-핵심-소스-코드-구현-mainformpas)
-7. [7단계: 실행 및 단계별 기능 검증](#7-6단계-실행-및-단계별-기능-검증)
-8. [8단계: 실무 트러블슈팅 & 핵심 팁](#8-7단계-실무-트러블슈팅--핵심-팁)
+5. [4단계: TcxGrid 데이터 바인딩 및 컬럼 속성 완벽 설정 (친절 가이드)](#5-4단계-tcxgrid-데이터-바인딩-및-컬럼-속성-완벽-설정-친절-가이드)
+6. [5단계: 핵심 소스 코드 구현 (MainForm.pas)](#6-5단계-핵심-소스-코드-구현-mainformpas)
+7. [6단계: 실행 및 단계별 기능 검증](#7-6단계-실행-및-단계별-기능-검증)
+8. [7단계: 실무 트러블슈팅 & 핵심 팁](#8-7단계-실무-트러블슈팅--핵심-팁)
 
 ---
 
@@ -168,50 +168,120 @@ GO
 
 ---
 
-## 5. 4단계: TcxGrid 데이터 바인딩 및 컬럼 커스터마이징
+## 5. 4단계: TcxGrid 데이터 바인딩 및 컬럼 속성 완벽 설정 (친절 가이드)
 
-1. **그리드 배치**:
-   - `ExpressQuantumGrid` 탭 ➔ **`TcxGrid`** 배치 (Name: `cxGrid1`)
-   - `cxGrid1.Align`: `alClient`
+### 1) 그리드 배치 및 View 생성
+1. Component Palette ➔ `ExpressQuantumGrid` 탭 ➔ **`TcxGrid`**를 폼 위에 올려놓습니다. (`cxGrid1`)
+2. `cxGrid1`을 선택하고 Object Inspector에서 **`Align`** 속성을 **`alClient`**로 지정합니다.
+3. `cxGrid1` 안에 기본으로 들어있는 `cxGrid1Level1`을 클릭하고, Object Inspector에서 **`GridView`** 속성의 드롭다운을 눌러 **`TcxGridDBTableView`**를 선택합니다.
+4. 생성된 뷰의 `Name`을 **`tvUsers`**로 변경합니다.
+5. `tvUsers`를 선택한 상태에서 **`DataController.DataSource`** 속성을 **`dsUsers`**로 지정합니다.
 
-2. **DB TableView 생성**:
-   - `cxGrid1`의 레벨 구조 창에서 `cxGrid1Level1`을 선택합니다.
-   - Object Inspector에서 `GridView` 속성의 콤보박스를 눌러 **`TcxGridDBTableView`**를 선택합니다.
-   - 생성된 View의 이름을 **`tvUsers`**로 변경합니다.
+---
 
-3. **데이터 소스 바인딩**:
-   - `tvUsers`를 선택하고 `DataController.DataSource` 속성을 **`dsUsers`**로 지정합니다.
+### 2) 컬럼 자동 생성 (`Create All Items`)
+1. 폼에 있는 `qryUsers`를 클릭하고, Object Inspector에서 `SQL` 속성에 임시로 `SELECT * FROM users`를 입력합니다.
+2. `qryUsers.Active` 속성을 **`True`**로 바꿉니다. (DB 데이터 필드가 활성화됩니다.)
+3. 폼 화면의 `cxGrid1` 위에서 **마우스 우클릭 ➔ `Create All Items`**를 클릭합니다.
+4. `users` 테이블의 모든 컬럼(`user_id`, `user_name`, `department` 등 8개)이 그리드에 자동으로 생성됩니다!
 
-4. **컬럼 자동 생성 (`Create All Items`)**:
-   - `qryUsers.SQL.Text`에 `SELECT * FROM users`를 임시 입력하고 `qryUsers.Active := True`로 설정합니다.
-   - `tvUsers`를 마우스 우클릭 ➔ **`Create All Items`**를 클릭합니다!
-   - `user_id`, `user_name`, `department`, `position`, `email`, `phone`, `is_active`, `created_at` 컬럼이 자동 생성됩니다.
+---
 
-5. **컬럼 속성 다듬기 (Object Inspector)**:
+### 3) 💡 [가장 중요] 어디서 컬럼을 선택하고 수정하나요?
 
-| 컬럼 Name | DataBinding.FieldName | Caption (한글) | Width | HeaderAlignmentHorz | PropertiesClass |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| `tvUsersuser_id` | `user_id` | `아이디` | `90` | `taCenter` | `TcxTextEditProperties` |
-| `tvUsersuser_name` | `user_name` | `성명` | `90` | `taCenter` | `TcxTextEditProperties` |
-| `tvUsersdepartment`| `department` | `부서명` | `110` | `taCenter` | `TcxTextEditProperties` |
-| `tvUsersposition`  | `position` | `직급` | `80` | `taCenter` | `TcxTextEditProperties` |
-| `tvUsersemail`     | `email` | `이메일` | `160` | `taLeftJustify` | `TcxTextEditProperties` |
-| `tvUsersphone`     | `phone` | `연락처` | `120` | `taCenter` | `TcxTextEditProperties` |
-| `tvUsersis_active` | `is_active` | `활성여부` | `70` | `taCenter` | `TcxCheckBoxProperties` |
-| `tvUserscreated_at`| `created_at` | `등록일시` | `140` | `taCenter` | `TcxDateEditProperties` |
+컬럼 속성을 수정하려면 **수정할 컬럼을 먼저 선택**해야 Object Inspector에 해당 컬럼의 속성이 나타납니다. 아래 **3가지 방법 중 가장 편한 방법**을 사용하세요.
 
-> [!NOTE]
-> `tvUsersis_active` 컬럼에 `TcxCheckBoxProperties`를 지정한 후:
-> - `Properties.ValueChecked`: `'Y'`
-> - `Properties.ValueUnchecked`: `'N'`
-> 으로 설정하면 그리드 상에서 체크박스 형태로 깔끔하게 표시됩니다.
+```
+[방법 1: 폼 화면에서 컬럼 머리글 직접 클릭 (가장 쉬움)]
++-------------------------------------------------------------+
+| [user_id (클릭!)] | user_name | department | position ...   |  <-- 마우스로 콕 클릭!
++-------------------+-----------+------------+----------------+
+| admin             | 최고관리자| 전산운영팀 | 팀장           |
++-------------------------------------------------------------+
+                              ▼
+[Object Inspector 창 (단축키 F11)]
+tvUsersuser_id : TcxGridDBColumn   <-- 선택된 컬럼 이름이 상단에 뜸!
+--------------------------------------------------------------
+Caption              아이디        <-- '아이디' 입력 후 엔터
+Width                90            <-- '90' 입력 후 엔터
+HeaderAlignmentHorz  taCenter      <-- 드롭다운에서 선택
+```
 
-6. **그리드 하단 Footer 요약 설정**:
-   - `tvUsers.OptionsView.Footer`: `True`
-   - `tvUsers.DataController.Summary.FooterSummaryItems`에 항목 추가:
-     - `Column`: `tvUsersuser_name`
-     - `Kind`: `skCount`
-     - `Format`: `'총 사용자: 0명'`
+* **방법 1 (추천)**: 폼 디자인 화면의 그리드에서 **컬럼 제목(예: `user_id` 머리글)**을 마우스 왼쪽 버튼으로 **직접 콕 클릭**합니다.
+* **방법 2 (디자이너 팝업창)**: 그리드를 **더블 클릭**하면 `tvUsers (TcxGridDBTableView)` 디자이너 창이 뜹니다. 상단 **`Columns` 탭**을 누르고 목록에서 원하는 컬럼을 클릭합니다.
+* **방법 3 (Object TreeView)**: 델파이 화면 좌측 상단 `Object TreeView` 구조창에서 `cxGrid1` ➔ `cxGrid1Level1` ➔ `tvUsers` 아래에 나열된 `tvUsersuser_id`를 클릭합니다.
+
+---
+
+### 4) 🎯 컬럼별 속성 세부 설정 가이드
+
+컬럼을 하나씩 클릭한 후, 화면 좌측 **Object Inspector(단축키 `F11`)**에서 아래 순서대로 속성을 수정합니다:
+
+#### ① 한글 제목 변경 (`Caption`)
+- Object Inspector에서 **`Caption`** 항목을 찾습니다.
+- 우측 입력칸에 영문 대신 한글 명칭(예: `아이디`, `성명`, `부서명`)을 입력하고 `Enter`를 칩니다.
+
+#### ② 컬럼 너비 변경 (`Width`)
+- **`Width`** 항목에 원하는 픽셀 숫자(예: `90`, `110`, `160`)를 입력하고 `Enter`를 칩니다.
+
+#### ③ 컬럼 헤더 가운데 정렬 (`HeaderAlignmentHorz`)
+- **`HeaderAlignmentHorz`** 항목 우측의 드롭다운 화살표를 눌러 **`taCenter`**를 선택합니다.
+
+#### ④ [필독] 체크박스로 표시하기 (`Properties` ➔ `CheckBox`)
+`tvUsersis_active` (활성여부) 컬럼은 텍스트('Y'/'N') 대신 체크박스로 보여주는 것이 좋습니다.
+
+1. 화면에서 **`is_active` 컬럼을 클릭**합니다.
+2. Object Inspector에서 **`Properties`** 항목을 찾습니다. (기본값은 비어있음)
+3. `Properties` 우측 드롭다운 화살표를 누르고 목록에서 **`CheckBox`**를 선택합니다.
+4. `Properties` 글자 왼쪽에 생긴 **`[+]` 기호**를 클릭하여 하위 속성을 펼칩니다.
+5. 펼쳐진 하위 속성 중:
+   - **`ValueChecked`** 항목에 **`Y`** 입력
+   - **`ValueUnchecked`** 항목에 **`N`** 입력
+   - **`DisplayChecked`** / **`DisplayUnchecked`**는 기본값 유지
+   *(이제 DB의 'Y' 값은 체크표시[V], 'N' 값은 빈 체크박스로 예쁘게 표시됩니다!)*
+
+#### ⑤ 날짜 포맷 지정하기 (`Properties` ➔ `DateEdit`)
+1. **`created_at` 컬럼을 클릭**합니다.
+2. Object Inspector의 **`Properties`** 드롭다운에서 **`DateEdit`**을 선택합니다.
+
+---
+
+### 5) 📋 8개 컬럼 전체 설정 완성표
+
+위 방법대로 아래 8개 컬럼의 속성을 차례대로 설정합니다:
+
+| 선택할 컬럼 Name | DataBinding.FieldName | Caption (한글 제목) | Width (너비) | HeaderAlignmentHorz | Properties (에디터 유형) | 세부 설정 |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| `tvUsersuser_id` | `user_id` | `아이디` | `90` | `taCenter` | `TextEdit` | 기본값 |
+| `tvUsersuser_name` | `user_name` | `성명` | `90` | `taCenter` | `TextEdit` | 기본값 |
+| `tvUsersdepartment`| `department` | `부서명` | `110` | `taCenter` | `TextEdit` | 기본값 |
+| `tvUsersposition`  | `position` | `직급` | `80` | `taCenter` | `TextEdit` | 기본값 |
+| `tvUsersemail`     | `email` | `이메일` | `160` | `taLeftJustify` | `TextEdit` | 좌측 정렬 |
+| `tvUsersphone`     | `phone` | `연락처` | `120` | `taCenter` | `TextEdit` | 기본값 |
+| `tvUsersis_active` | `is_active` | `활성여부` | `70` | `taCenter` | **`CheckBox`** | `ValueChecked: Y`<br>`ValueUnchecked: N` |
+| `tvUserscreated_at`| `created_at` | `등록일시` | `140` | `taCenter` | **`DateEdit`** | 기본값 |
+
+---
+
+### 6) 📊 그리드 하단 Footer 요약(총 인원 수) 추가하는 법
+
+그리드 바닥에 `총 사용자: 8명`과 같은 집계 행을 표시하는 단계별 방법입니다:
+
+1. **Footer 영역 켜기**:
+   - `tvUsers`를 선택합니다.
+   - Object Inspector에서 **`OptionsView`** 왼쪽의 `[+]`를 클릭하여 펼칩니다.
+   - **`Footer`** 속성을 **`True`**로 변경합니다. (그리드 맨 밑에 회색 요약 바가 생깁니다.)
+2. **요약 항목 추가**:
+   - Object Inspector에서 **`DataController`** ➔ **`Summary`** 앞의 `[+]`를 차례로 펼칩니다.
+   - **`FooterSummaryItems`** 항목 우측의 `(TcxDataFooterSummaryItems)` 또는 **`[...]`** 버튼을 더블 클릭합니다.
+   - `Editing tvUsers.DataController.Summary.FooterSummaryItems` 창이 팝업됩니다.
+   - 창 상단의 **`Add New` (`[+]` 아이콘 또는 `Ins` 키)**를 클릭합니다.
+3. **요약 속성 지정**:
+   - 생성된 `0 - TcxGridDBTableSummaryItem`을 선택하고 좌측 Object Inspector에서 다음 3개 값을 지정합니다:
+     - **`Column`**: 드롭다운에서 **`tvUsersuser_name`** 선택
+     - **`Kind`**: 드롭다운에서 **`skCount`** 선택 (건수 집계)
+     - **`Format`**: **`총 사용자: 0명`** 입력 후 엔터!
+   - 디자이너 창을 닫습니다.
 
 ---
 
