@@ -6,7 +6,8 @@ uses
   DataModule in 'DataModule.pas' {DataModuleMain: TDataModule},
   LoginForm in 'LoginForm.pas' {FormLogin},
   MainForm in 'MainForm.pas' {FormMain},
-  UserListForm in 'UserListForm.pas' {FormUserList};
+  UserListForm in 'UserListForm.pas' {FormUserList},
+  DataModuleStock in 'DataModuleStock.pas' {DataModule1: TDataModule};
 
 {$R *.res}
 
@@ -16,7 +17,7 @@ begin
 
   // 1. 전역 DataModule 먼저 생성 (DB 커넥션 관리)
   Application.CreateForm(TDataModuleMain, DataModuleMain);
-
+  Application.CreateForm(TDataModule1, DataModule1);
   // 2. 로그인 폼 모달 실행 (DataModule의 커넥션 공유)
   FormLogin := TFormLogin.Create(nil);
   try
